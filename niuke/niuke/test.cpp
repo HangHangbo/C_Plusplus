@@ -50,3 +50,35 @@ int main()
 		system("pause");
 		return 0;
 	}*/
+
+#include<string>
+//int main()
+//{/*
+//	char a[] = "лллллл";
+//	char b[5];
+//	b[0] = -52;
+//	b[1] = -52;
+//	b[2] = -52;
+//	b[3] = -52;
+//	cout << b << endl;*/
+//	vector<int>v;
+//
+//	system("pause");
+//	return 0;
+//}
+class Solution {
+public:
+	int StrToInt(string str) {
+		string::iterator sit = str.begin();
+		int ret = 0;
+		int flag =1;
+		while (*sit >= '0'&&*sit <= '9'){
+			ret += *sit - '0';
+		}
+		else if ()
+		{
+
+		}
+
+	}
+};
