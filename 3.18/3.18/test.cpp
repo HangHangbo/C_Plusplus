@@ -128,50 +128,56 @@ using namespace std;
 //}
 
 
-////typedef int VDataType;
-//template<class T>
-//class Vector{
-//public:
-//	Vector()
-//		:_a(nullptr)
-//		, _capacity(0)
-//		, _size(0)
-//	{}
-//	~Vector(){
-//		if (_a){
-//			delete _a;
-//			_size = _capacity = 0;
-//		}
-//	}
-//	void pushBack(const T& x){
-//		if (_size == _capacity){
-//			size_t newcapacity = _capacity==0 ? 3 : _capacity*2;
-//			T* tmp = new T[newcapacity];
-//			if (_a){
-//				memcpy(tmp, _a, sizeof(T)*_capacity);
-//				delete[] _a;
-//				_a = tmp;
-//			}
-//			_capacity = newcapacity;
-//		}
-//		_a[_size] = x;
-//		_size++;
-//	}
-// T operator[](size_t pos) 
-//	{
-//		assert(pos < _size);
-//
-//		return _a[pos];
-//	}
-//	size_t Size()
-//	{
-//		return _size;
-//	}
-//private:
-//	T *_a;
-//	size_t _size;
-//	size_t _capacity;
-//};
+//typedef int VDataType;
+template<class T>
+class Vector{
+public:
+	Vector()
+		:_a(nullptr)
+		, _capacity(0)
+		, _size(0)
+	{}
+	~Vector(){
+		if (_a){
+			delete _a;
+			_size = _capacity = 0;
+		}
+	}
+	void pushBack(const T x){
+		if (_size == _capacity){
+			size_t newcapacity;
+			if (_capacity == 0){
+				 newcapacity = 3;
+			}
+			else{
+				 newcapacity =  _capacity * 2;
+			}
+			T* tmp = new T[newcapacity];
+			if (_a){
+				memcpy(tmp, _a, sizeof(T)*_capacity);
+				delete[] _a;
+				_a = tmp;
+			}
+			_capacity = newcapacity;
+		}
+ 		_a[_size++] = x;
+		
+	}
+ T& operator[](size_t pos) 
+	{
+		assert(pos < _size);
+
+		return _a[pos];
+	}
+	size_t Size()
+	{
+		return _size;
+	}
+private:
+	T *_a;
+	size_t _size;
+	size_t _capacity;
+};
 
 //template<class T>
 //class Vector
@@ -229,22 +235,22 @@ using namespace std;
 //
 //
 //
-//int main()
-//{
-//	Vector<int> v1;
-//	v1.pushBack(1);
-//	v1.pushBack(2);
-//	v1.pushBack(3);
-//	v1.pushBack(4);
-//	for (size_t i = 0; i < v1.Size(); ++i){
-//		cout << v1[i] << ' ';
-//	}
-//	cout << endl;
-//	system("pause");
-//	/*Vector<double> v2;*/
-//	//如果想让v1中存放int类型，v2中放double类型就不能满足了
-//	return 0;
-//}
+int main()
+{
+	Vector<int> v1;
+	v1.pushBack(1);
+	v1.pushBack(2);
+	v1.pushBack(3);
+	v1.pushBack(4);
+	for (size_t i = 0; i < v1.Size(); ++i){
+		cout << v1[i] << ' ';
+	}
+	cout << endl;
+	system("pause");
+	/*Vector<double> v2;*/
+	//如果想让v1中存放int类型，v2中放double类型就不能满足了
+	return 0;
+}
 
 
 #include<vector>
@@ -325,16 +331,16 @@ using namespace std;
 //	}
 //	return value;
 //}
-void teststring2(){
-	string s("hello");
-	cout << s.size() << endl;
-	cout << s.capacity() << endl;
-}
-int main()
-{
-	teststring2();
-
-
-	system("pause");
-	return 0;
-}
+//void teststring2(){
+//	string s("hello");
+//	cout << s.size() << endl;
+//	cout << s.capacity() << endl;
+//}
+//int main()
+//{
+//	teststring2();
+//
+//
+//	system("pause");
+//	return 0;
+//}
