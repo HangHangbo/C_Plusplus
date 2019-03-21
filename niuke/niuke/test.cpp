@@ -1,6 +1,12 @@
+#include<iostream>
+using namespace std;
+#include<string>
+
+
+
+
 ////求1+2+3+4+...+n不使用for while if else switch case 等关键字和判断语句
-//#include<iostream>
-//using namespace std;
+
 //class Solution {
 //public:
 //	class Sum{
@@ -51,8 +57,7 @@ int main()
 		system("pause");
 		return 0;
 	}*/
-#include<iostream>
-#include<string>
+
 //int main()
 //{/*
 //	char a[] = "烫烫烫";
@@ -98,30 +103,81 @@ int main()
 //		}
 //		return value*flag;
 //	}
-//private:
+//
 //
 //};
  
+//给定两个字符串形式的非负整数 num1 和num2 ，计算它们的和。
+//
+//注意：
+//
+//num1 和num2 的长度都小于 5100.
+//num1 和num2 都只包含数字 0 - 9.
+//num1 和num2 都不包含任何前导零。
+//你不能使用任何內建 BigInteger 库， 也不能直接将输入的字符串转换为整数形式。
+
+
+//class Solution {
+//public:
+//	string addStrings(string num1, string num2) {
+//		
+//
+//	}
+//};
+
+//翻转字符串
+
+string reverseString(string s)
+{
+	size_t start = 0;
+	size_t end = s.size() - 1;
+	while (start < end){
+		swap(s[start], s[end]);
+		start++;
+		end--;
+	}
+	return s;
+}
+
+
+//字符串中的一个唯一的字符.1
+
 class Solution {
 public:
-	int value(string x)
-	{
-		if (x.empty()){
-			return 0;
-			{
-				string::iterator it = x.rbegin();
-				int a = *it - '0';
-				++it;
-				while (it != rend){
-					a += (*it - '0') * 10;
-					++it;
-				}
-				return a;
-			}
-			string addStrings(string num1, string num2) {
+	int firstUniqChar(string s) {
+		int count[26] = { 0 };
+		int size = s.size();
+		for (auto& e : s){
+			count[e-'a']++;
+		}
+		for (int i = 0; i < s.size(); i++){
+			if (count[s[i]-'a'] == 1)
+				return i;
+		}
+		return -1;
+	}
+};
 
-				int value1 = value(num1);
-				int value2 = value(num2);
-				return value1 + value2;
-			}
-		};
+
+//字符串中的一个唯一的字符.2
+
+
+
+
+
+//输出最后一个单词的长度
+
+int main()
+{
+	string s;
+	while (cin >> s){
+		size_t pos = s.rfind(' ');
+		if (pos == string::npos){
+			cout << s.size() << endl;
+		}
+		else{
+			cout << s.size() - pos - 1 << endl;
+		}
+		}
+	return 0;
+}
