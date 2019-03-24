@@ -1,6 +1,6 @@
-//#include<iostream>
-//using namespace std;
-//#include<string>
+#include<iostream>
+using namespace std;
+#include<string>
 
 
 
@@ -136,9 +136,13 @@ public:
 			if (len1 >= 0){
 				sum += b;
 			}
-			if (sum > 10){
+			if (sum > 9){
 				carray = 1;
 				sum -= 10;
+			}
+			else
+			{
+				carray = 0;
 			}
 			num3 += sum + '0';
 
@@ -152,6 +156,9 @@ public:
 			////num3.insert(0, 1, sum + '0');  //头插
 			len1--;
 			len2--;
+		}
+		if (carray == 1){
+			num3.insert(0, 1, '1');
 		}
 	/*	if (len1 == 0) {
 			for (int i = len2; i > 0; i--) {
@@ -176,12 +183,13 @@ public:
 			if (carray == 1) num3 += '1';
 		}*/
 		//反转
-		int len3 = num3.length();
+		/*int len3 = num3.length();
 		for (int i = 0; i <= (len3 - 1) / 2; i++) {
 			char c = num3[i];
 			num3[i] = num3[len3 - 1 - i];
 			num3[len3 - 1 - i] = c;
-		}
+		}*/
+		reverse(num3.begin(),num3.end());
 		return num3;
 	}
 };
@@ -221,10 +229,10 @@ public:
 
 
 //字符串中的一个唯一的字符.2
-
-#include<iostream>
-using namespace std;
-#include<string>
+//
+//#include<iostream>
+//using namespace std;
+//#include<string>
 //int main()
 //{	string s;
 //	while (getline(cin,s))
@@ -323,3 +331,15 @@ using namespace std;
 //	}
 //};
 
+int main()
+{
+	Solution solu;
+	string s;
+	string c;
+	while (cin>>s>>c){
+		cout << solu.addStrings(s,c);
+	}
+
+	system("pause");
+	return 0;
+}
