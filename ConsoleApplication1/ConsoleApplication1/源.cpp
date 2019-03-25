@@ -1,24 +1,12 @@
-#define  _CRT_SECURE_NO_WARNINGS 1
+//#define  _CRT_SECURE_NO_WARNINGS 1
 #include<iostream>
 using namespace std;
 #include<assert.h>
-#include<string.h>
 
 
 class String
 {
 public:
-	//增容
-	void Reserve(size_t newcapacity)
-	{
-		if (newcapacity > _capacity){
-			char* str = new char[newcapacity + 1];
-			strcpy(str, _str);
-			delete[] _str;
-			_str = str;
-			_capacity = newcapacity;
-		}
-	}
 	typedef char* Iterator;
 	typedef char* const_Iterator;
 	//全缺省，缺省值为" "
@@ -58,28 +46,38 @@ public:
 	void Swap(String & tmp)
 	{
 		swap(_str, tmp._str);
-		swap(_size,tmp._size);
+		swap(_size, tmp._size);
 		swap(_capacity, tmp._capacity);
 	}
 
-	
+
 	~String()
 	{
 		if (_str){
-			delete[] _str;
+			delete[]_str;
 			_str = nullptr;
 		}
 	}
 
-	
+	//增容
+	void Reserve(size_t newcapacity)
+	{
+		if (newcapacity > _capacity){
+			char* str = new char[newcapacity + 1];
+			strcpy(str, _str);
+			delete[]_str;
+			_str = str;
+			_capacity = newcapacity;
+		}
+	}
 
 	//后插
 	void PushBack(char c)
 	{
-		
+
 		if (_size == _capacity){
 
-			size_t newc = (_capacity == 0 ? 15 : _capacity * 2);
+			size_t newc = (_capacity = 0 ? 15 : _capacity * 2);
 			Reserve(newc);
 		}
 		_str[_size++] = c;
@@ -108,24 +106,15 @@ public:
 		assert(_size > 0);
 
 	}
-	size_t Size()
-	{
-		return _size;
-	}
-	size_t Capacity()
-	{
-		return _capacity;
-	}
-
 
 	//尾插
 	void Append(const char* str){
 		size_t sz = _capacity < strlen(str);
 		if (sz + _size)
 		{
-			Reserve(sz+_size);
+			Reserve(sz + _size);
 		}
-		strcpy(_str+_size, str);
+		strcpy(_str + _size, str);
 		_size += sz;
 	}
 	void Resize(size_t n, char c = '\0')
@@ -142,12 +131,12 @@ public:
 		}
 		_size = n;
 		_str[_size] = '\0';
-	
-		
+
+
 		//_size=n _[_size]='\0'
 	}
 	//在pos位置插入字符c
-	void Insert(size_t pos,const char c)
+	void Insert(size_t pos, const char c)
 	{
 		assert(_size > pos);
 		if (_size == _capacity)
@@ -156,67 +145,36 @@ public:
 			size_t newc = (_capacity == 0 ? 15 : _capacity * 2);
 			Reserve(newc);
 		}
-		size_t end =_size;
+		size_t end = _size;
 		while (end > pos)
 		{
 			//从后向前挪动
 			_str[end] = _str[end - 1];
 			--end;
 		}
-		_str[pos] = c;
-		_str[++_size] = '\0';
-
-		
 	}
 	//插入字符串
-	void Insert(size_t pos, const char* str)
-	{
-		assert(pos < _size);
-		size_t len = strlen(str);
-		if (_capacity < _size + len){
-			//size_t newc = (_capacity == 0 ? len + 1 : len + _size);
-			Reserve(len + _size);
-		}
-		//从后向前挪动数据
-		size_t end = _size + len;
-		while (end>pos + len - 1){
-			//第一个挪动的为'\0'
-			_str[end] = _str[end - len];
-			--end; 
-		}
-		//从pos位置拷贝str
-		for (int i = 0; i < len; i++){
-			_str[i + pos] = str[i];
-		}
-		_size += len;
-	}
-	void Clear()
-	{
-		_size = 0;
-		_str[_size] = '\0';
-	}
-	const char* C_Str()const
-	{
-		return _str;
-	}
-	bool Empty()const
-	{
-		return 0 == _size;
-	}
-	void Resize(size_t newSize, char c = char())
-	{
-		if (newSize > _size)
-		{
-			// 如果newSize大于底层空间大小，则需要重新开辟空间
-			if (newSize > _capacity)
-			{
-				Reserve(newSize);
-			}
-			memset(_str + _size, c, newSize - _size);
-		}
-		_size = newSize;
-		_str[newSize] = '\0';
-	}
+	//void Insert(size_t pos, const char* str)
+	//{
+	//	assert(pos < _size);
+	//	size_t len = strlen(str);
+	//	if (_capacity < _size + len){
+	//		//size_t newc = (_capacity == 0 ? len + 1 : len + _size);
+	//		Reserve(len + _size);
+	//	}
+	//	//从后向前挪动数据
+	//	size_t end = _size + len;
+	//	while (end>pos + len - 1){
+	//		//第一个挪动的为'\0'
+	//		_str[end] = _str[end - len];
+	//		--end; 
+	//	}
+	//	//从pos位置拷贝str
+	//	for (int i = 0; i < len; i++){
+	//		_str[i + pos] = str[i];
+	//	}
+	//	_size += len;
+	//}
 
 	void Erase(size_t pos, size_t len)
 	{
@@ -254,19 +212,11 @@ ostream& operator<<(ostream& _cout, const String &s)
 
 int main()
 {
-	String s("sad");
+	String s;
 	s.PushBack('a');
 	s.PushBack('b');
 	s.PushBack('c');
 	s.PushBack('d');
-	cout << s << endl;  //s a d a b c d
-	s.Insert(0, 'a');
-	s.Insert(2, 't');
-	s.Insert(3, 'p');  //a s  t p a d a b c d
-	cout << s << endl;
-	s.Insert(2, "po"); //a s  p o t p a d a b c d
-	cout << s << endl;
-	s.Erase(2,10);
 	cout << s << endl;
 	system("pause");
 	return 0;
