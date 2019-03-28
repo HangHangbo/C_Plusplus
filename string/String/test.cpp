@@ -22,7 +22,7 @@ public:
 	typedef char* Iterator;
 	typedef char* const_Iterator;
 	//全缺省，缺省值为" "
-	String(char* str = " ")  //构造
+	String(const char* str = " ")  //构造
 		:_size(strlen(str))
 		, _capacity(_size)
 		, _str(new char[_size + 1])
@@ -117,16 +117,34 @@ public:
 		return _capacity;
 	}
 
+	//+= 类
+	String& operator+=(const String & s)
+	{
+		Append(s._str);
+		return *this;
+	}
+
+	//+= 字符串
+	String& operator+=(const char c)
+	{
+		PushBack(c);
+		return *this;
+	}
+	String & operator+=(const char *str)
+	{
+		Append(str);
+		return *this;
+	}
 
 	//尾插
 	void Append(const char* str){
-		size_t sz = _capacity < strlen(str);
-		if (sz + _size)
+		size_t sz = _size+ strlen(str);
+		if (sz > _capacity)
 		{
-			Reserve(sz+_size);
+			Reserve(sz);
 		}
 		strcpy(_str+_size, str);
-		_size += sz;
+		_size = sz;
 	}
 	void Resize(size_t n, char c = '\0')
 	{
@@ -203,20 +221,7 @@ public:
 	{
 		return 0 == _size;
 	}
-	void Resize(size_t newSize, char c = char())
-	{
-		if (newSize > _size)
-		{
-			// 如果newSize大于底层空间大小，则需要重新开辟空间
-			if (newSize > _capacity)
-			{
-				Reserve(newSize);
-			}
-			memset(_str + _size, c, newSize - _size);
-		}
-		_size = newSize;
-		_str[newSize] = '\0';
-	}
+
 
 	void Erase(size_t pos, size_t len)
 	{
@@ -251,23 +256,69 @@ ostream& operator<<(ostream& _cout, const String &s)
 	}
 	return _cout;
 }
+//类+类
+String operator+(const String & s1, const String & s2)
+{
+	String s3(s1);
+	s3 += s2;
+	return s3;
+}
+//类+字符串
+String operator+(const String&s1, const char *str)
+{
+	String s3(s1);
+	s3 += str;
+	return s3;
+}
+//字符串+类
+String operator+(const char *str, const String& s1)
+{
+	String s3(str);
+	s3 += s1;
+	return s3;
+
+}
+//void Test1()
+//{
+//	String s("sad");
+//	s.PushBack('a');
+//	s.PushBack('b');
+//	s.PushBack('c');
+//	s.PushBack('d');
+//	cout << s << endl;  //s a d a b c d
+//	//s.Insert(0, 'a');
+//	//s.Insert(2, 't');
+//	//s.Insert(3, 'p');  //a s  t p a d a b c d
+//	//cout << s << endl;
+//	//s.Insert(2, "po"); //a s  p o t p a d a b c d
+//	s.Append("asd");
+//	cout << s << endl;
+//	/*String s2(s);
+//	s.Erase(2,10);
+//	
+//	/*cout << s << endl;
+//	cout << s2 << endl;*/
+//
+//}
+
+
 
 int main()
 {
-	String s("sad");
-	s.PushBack('a');
-	s.PushBack('b');
-	s.PushBack('c');
-	s.PushBack('d');
-	cout << s << endl;  //s a d a b c d
-	s.Insert(0, 'a');
-	s.Insert(2, 't');
-	s.Insert(3, 'p');  //a s  t p a d a b c d
-	cout << s << endl;
-	s.Insert(2, "po"); //a s  p o t p a d a b c d
-	cout << s << endl;
-	s.Erase(2,10);
-	cout << s << endl;
+	String s1("as");
+	String s2("as");
+	String s3; 
+	String s4; 
+	String s5;
+	char *str = "df";
+	s3 = s1 + s2;
+	s4 = s1 + str;
+	s5 = str + s1;
+	cout << s3 << endl;
+	cout << s4 << endl;
+	cout << s5 << endl;
+
+	
 	system("pause");
 	return 0;
 }
