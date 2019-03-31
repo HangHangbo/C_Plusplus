@@ -1,7 +1,7 @@
 #include<iostream>
 using namespace std;
 #include<string>
-
+#include<vector>
 
 
 
@@ -116,50 +116,50 @@ int main()
 //num1 和num2 都不包含任何前导零。
 //你不能使用任何內建 BigInteger 库， 也不能直接将输入的字符串转换为整数形式。
 
-
-class Solution {
-public:
-	string addStrings(string num1, string num2) {
-		int len1 = num1.length()-1;
-		int len2 = num2.length()-1;
-		string num3;  
-		int carray = 0;
-		int sum = 0;
-		while (len1 >= 0 || len2 >= 0) {
-			int a = num1[len1] - '0';
-			int b = num2[len2] - '0';
-			 sum = 0;
-				sum+= carray;
-			if (len1 >= 0){
-				sum += a;
-			}
-			if (len1 >= 0){
-				sum += b;
-			}
-			if (sum > 9){
-				carray = 1;
-				sum -= 10;
-			}
-			else
-			{
-				carray = 0;
-			}
-			num3 += sum + '0';
-
-
-			//int sum = a + b + carray;
-			//carray = sum >= 10 ? 1 : 0;
-			//sum = sum - 10;   //sum的范围为0~18 %运算比较耗时 使用 -更方便
-			//char c = '0' + sum; //将当前为转为字符型
-			//num3 += c;         //逆行存储
-			////int sum;
-			////num3.insert(0, 1, sum + '0');  //头插
-			len1--;
-			len2--;
-		}
-		if (carray == 1){
-			num3.insert(0, 1, '1');
-		}
+//
+//class Solution {
+//public:
+//	string addStrings(string num1, string num2) {
+//		int len1 = num1.length()-1;
+//		int len2 = num2.length()-1;
+//		string num3;  
+//		int carray = 0;
+//		int sum = 0;
+//		while (len1 >= 0 || len2 >= 0) {
+//			int a = num1[len1] - '0';
+//			int b = num2[len2] - '0';
+//			 sum = 0;
+//				sum+= carray;
+//			if (len1 >= 0){
+//				sum += a;
+//			}
+//			if (len1 >= 0){
+//				sum += b;
+//			}
+//			if (sum > 9){
+//				carray = 1;
+//				sum -= 10;
+//			}
+//			else
+//			{
+//				carray = 0;
+//			}
+//			num3 += sum + '0';
+//
+//
+//			//int sum = a + b + carray;
+//			//carray = sum >= 10 ? 1 : 0;
+//			//sum = sum - 10;   //sum的范围为0~18 %运算比较耗时 使用 -更方便
+//			//char c = '0' + sum; //将当前为转为字符型
+//			//num3 += c;         //逆行存储
+//			////int sum;
+//			////num3.insert(0, 1, sum + '0');  //头插
+//			len1--;
+//			len2--;
+//		}
+//		if (carray == 1){
+//			num3.insert(0, 1, '1');
+//		}
 	/*	if (len1 == 0) {
 			for (int i = len2; i > 0; i--) {
 				int b = num2[i - 1] - '0';
@@ -189,10 +189,10 @@ public:
 			num3[i] = num3[len3 - 1 - i];
 			num3[len3 - 1 - i] = c;
 		}*/
-		reverse(num3.begin(),num3.end());
-		return num3;
-	}
-};
+//		reverse(num3.begin(),num3.end());
+//		return num3;
+//	}
+//};
 
 ////翻转字符串
 //
@@ -331,15 +331,104 @@ public:
 //	}
 //};
 
-int main()
-{
-	Solution solu;
-	string s;
-	string c;
-	while (cin>>s>>c){
-		cout << solu.addStrings(s,c);
-	}
+//int main()
+//{
+//	Solution solu;
+//	string s;
+//	string c;
+//	while (cin>>s>>c){
+//		cout << solu.addStrings(s,c);
+//	}
+//
+//	system("pause");
+//	return 0;
+//}
 
-	system("pause");
-	return 0;
-}
+
+//给定一个仅包含数字 2-9 的字符串，返回所有它能表示的字母组合。
+
+//给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母。
+
+//递归思想
+//
+//class Solution {
+//	string mapLetter[10] = { "", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz" };
+//public:
+//	void combination(string& digits, int depth, const string& comStr, vector<string>& strVec)
+//	{
+//		//判断是否走完最后一层
+//		if (digits.size() == depth)
+//		{
+//			strVec.push_back(comStr);
+//			return;
+//		}
+//		//获取当前层数的映射
+//		int mapNum = digits[depth] - '0';
+//		string letters = mapLetter[mapNum];
+//		//当前层数的数字每一个映射字母相结合:'a''b''c'......
+//		for (auto& e : letters)
+//		{
+//			combination(digits, depth + 1, comStr + e, strVec);
+//		}
+//	}
+//	vector<string> letterCombinations(string digits) 
+//	{
+//		vector<string> strVec;
+//		size_t depth = 0;
+//		if (digits.empty())  //是否映射完成，返回strVec
+//			return strVec;
+//		string comStr;
+//		combination(digits, depth, comStr, strVec);  //digits 输入的数字  depth  统计递归深度   comStr  记录映射结果   strVec 当走到最后一层用于返回映射结果
+//  		return strVec;
+//	}
+//};
+
+
+//给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现了三次。找出那个只出现了一次的元素
+class Solution {
+public:
+	int singleNumber(vector<int>& nums) {
+		int result = 0;
+		for (int i = 0; i<32; i++){
+			int mask = 1 << i;
+			int count = 0;
+			for (int j = 0; j<nums.size(); j++){
+				if ((mask&nums[j]) != 0)
+					count++;
+			}
+			if (count % 3 == 1)
+				result = mask | result;
+		}
+		return result;
+
+	}
+};
+
+//给定一个整数数组 nums，其中恰好有两个元素只出现一次，其余所有元素均出现两次。 找出只出现一次的那两个元素。
+class Solution {
+public:
+	vector<int> singleNumber(vector<int>& nums) {
+		int a = 0, b = 0, c = 0;
+		for (auto& x : nums)
+			a ^= x;
+		a = a&~(a - 1);
+		for (auto& x : nums)
+		if (x&a) b ^= x;
+		else c ^= x;
+		return{ b, c };
+
+	}
+};
+
+//杨辉三角
+
+class Solution {
+public:
+	vector<vector<int>> generate(int numRows) {
+		vector<vector<int>> Matrix;
+		//分配numRows行
+		//
+		Matra
+
+	}
+};
