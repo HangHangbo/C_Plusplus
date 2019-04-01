@@ -226,26 +226,26 @@ void PrintVector(const Vector<T>& v)
 	}
 	cout << endl;
 }
-int main()
-{
-	
-	Vector<int> v1;
-	v1.PushBack(1);
-	v1.PushBack(1);
-	v1.PushBack(1);
-	v1.PushBack(1);
-	PrintVectorFor(v1);
-	Vector<string> v2;
-	v2.PushBack("hello");
-	v2.PushBack("world");
-	PrintVector(v2);
-	
-	Vector<int> v3(v1);
-	PrintVectorFor(v3);
-	system("pause");
-	
-	return 0;
-}
+//int main()
+//{
+//	
+//	Vector<int> v1;
+//	v1.PushBack(1);
+//	v1.PushBack(1);
+//	v1.PushBack(1);
+//	v1.PushBack(1);
+//	PrintVectorFor(v1);
+//	Vector<string> v2;
+//	v2.PushBack("hello");
+//	v2.PushBack("world");
+//	PrintVector(v2);
+//	
+//	Vector<int> v3(v1);
+//	PrintVectorFor(v3);
+//	system("pause");
+//	
+//	return 0;
+//}
 //int main()
 //{
 //	Vector<string> v2;
@@ -283,12 +283,62 @@ int main()
 //	PrintVectorFor(v2);
 //
 //}
-//
-//
-//int main()
-//{
-//	testVector1();
-//
-//	system("pause");
-//	return 0;
-//}
+
+void testVector2()
+{
+	Vector<int> v;
+	v.PushBack(1);
+	v.PushBack(2);
+	v.PushBack(3);
+	v.PushBack(4);
+	//v.PushBack(56);
+	Vector<int>::Iterator vit = v.begin();
+	while (vit != v.end())
+	{
+		if (*vit % 2 == 0)
+			v.Erase(vit);
+		else
+			vit++;
+	}
+	PrintVectorFor(v);
+}
+#include<vector>
+void testVector3()
+{
+	vector<int> v;
+	v.push_back(1);
+	v.push_back(2);
+	v.push_back(3);
+	v.push_back(4);
+	//v.PushBack(56);
+	vector<int>::iterator vit = v.begin();
+	while (vit != v.end())
+	{
+		if (*vit % 2 == 0)
+			vit = v.erase(vit);
+		else
+			vit++;
+	}
+
+}
+void testVector4()
+{
+	Vector<string> v2;
+	v2.PushBack("hello");
+	v2.PushBack("world");
+	v2.PushBack("bite");
+	v2.PushBack("tech");
+	v2.PushBack("school");
+	PrintVectorFor(v2);
+	string s = "abc";  // string(const char* str)
+	v2.Resize(18, "abc");
+	PrintVectorFor(v2);
+}
+
+int main()
+{
+	testVector4();
+
+	system("pause");
+	return 0;
+}
