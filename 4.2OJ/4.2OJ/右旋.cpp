@@ -7,10 +7,20 @@ class Solution {
 public:
 	void rotate(vector<int>& nums, int k) {
 		int sz = nums.size();
-		for (int i = 0; i<sz - k; i++)
+		int j;
+		while (k--)
 		{
-			nums.push_back(nums[i]);
+			for (int i = 0; i<sz; i++)
+			{
+				j = nums[sz - 1 - i];
+				nums[sz - 1 - i] = nums[sz - i - 2];
+				nums[sz - 2 - i] = j;
+			}
 		}
-		nums = 
 	}
 };
+
+int main()
+{
+	return 0;
+}

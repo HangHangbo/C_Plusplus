@@ -89,7 +89,21 @@ public:
 		_head->_next = _head;
 		_head->_prev = _head;
 	}
-
+	size_t Size()const
+	{
+		size_t count = 0;
+		pNode cur = _head->_next;
+		while (cur != _head)
+		{
+			count++;
+			cur = cur->_next;
+		}
+		return count;
+	}
+	bool Empty()
+	{
+		return _head->_next == _head;
+	}
 	void PushBack(const T&val)                        //尾插
 	{
 		/*pNode curNode = new Node(val);
@@ -100,7 +114,7 @@ public:
 		_head->_prev = curNode;*/
 		Insert(end(), val);
 	}
-	iterator begin()
+	iterator begin()                                   //迭代器正向
 	{
 		return iterator(_head->_next);
 	}
@@ -108,7 +122,7 @@ public:
 	{
 		return iterator(_head);
 	}
-	void Insert(iterator pos,const T& val)                //pos前插入一个节点
+	iterator Insert(iterator pos,const T& val)                //pos前插入一个节点
 	{
 		pNode newNode = new Node(val);
 		pNode cur = pos._node;
@@ -117,6 +131,19 @@ public:
 		newNode->_prev = prev;
 		cur->_prev = newNode;
 		newNode->_next = cur;
+		return iterator(newNode);
+	}
+	void Clear()                                    //销毁链表
+	{
+		pNode cur = _head->_next;
+		while (cur != _head)
+		{
+			_head->_next = cur->_next;
+			delete (cur);
+			cur = _head->_next;
+		}
+		_head->_next = _head;
+		_head->_prev = _head;
 	}
 
 	iterator Erase(iterator pos)                              //删除pos节点
@@ -129,18 +156,29 @@ public:
 			prev->_next = next;
 			next->_prev = prev;
 			delete(cur);
-			pos = iterator(next);                           //更新迭代器，指向下一个位置
+			pos = iterator(next);         //更新迭代器，指向下一个位置
 		
 		}
 		return pos;
 	}
-	void Popback()
+	void Popback()                                      //尾删
 	{
 		pNode cur = _head->_prev;
 		pNode prev = cur->_prev;
 		prev->_next = _head;
 		_head->_prev = prev;
 		delete(cur);
+	}
+	void PushFront(const T&val)                     //头插
+	{
+		pNode newNode = new Node(val);
+		pNode cur = _head->_prev;
+		pNode ret = _head;
+		cur->_next = newNode;
+		newNode->_prev = cur;
+		ret->_prev = newNode;
+		newNode->_next =ret;
+		_head = newNode;
 	}
 private:
 	pNode _head;              //链表的节点，头指针，
@@ -156,6 +194,11 @@ int main()
 	/*lst.Erase(lst.begin());
 	lst.Erase(--lst.end());*/
 	lst.Popback();
+	lst.PushFront(0);
+	cout<<lst.Size()<<endl;
+
+	lst.Clear();
+	cout << lst.Empty() << endl;
 	auto lit = lst.begin();
 	while (lit != lst.end())
 	{
