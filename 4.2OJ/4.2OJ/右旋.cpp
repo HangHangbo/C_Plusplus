@@ -12,9 +12,7 @@ public:
 		{
 			for (int i = 0; i<sz; i++)
 			{
-				j = nums[sz - 1 - i];
-				nums[sz - 1 - i] = nums[sz - i - 2];
-				nums[sz - 2 - i] = j;
+				swap(nums[sz - 1 - i], nums[sz - 2 - i]);
 			}
 		}
 	}
