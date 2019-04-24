@@ -306,50 +306,84 @@ using namespace std;
 // 2.  被调用函数必须为虚函数，并且被重写（函数名，参数，返回值全部相同）
 // 3.  函数重写: 协变： 返回值的类型可以是继承关系
 
+//class A
+//{};
+//class B : public A
+//{
+//
+//};
+//
+//class Person {
+//public:
+//	virtual void BuyTicket() { cout << "买票-全价" << endl; }
+//};
+//class Student : public Person {
+//public:
+//	virtual void BuyTicket() { cout << "买票-半价" << endl; }
+//};
+//
+//class S2 : public Student
+//{
+//public:
+//	virtual void BuyTicket() { cout << "买票-免费" << endl; }
+//};
+//void Func(Person& p)
+//{
+//	p.BuyTicket();
+//}
+//
+//void Func2(Student& p)
+//{
+//	p.BuyTicket();
+//}
+//
+//int main()
+//{
+//	Person p;
+//	Student s;
+//	S2 s2;
+//	/*p.BuyTicket();
+//	s.BuyTicket();*/
+//	//多态看实际指向的对象，调用对象对应类型的代码
+//	//非多态看类型
+//	Func(p);
+//	Func(s);
+//
+//	Func2(s2);
+
+//	return 0;
+//}
 class A
-{};
-class B : public A
-{
-
-};
-
-class Person {
-public:
-	virtual void BuyTicket() { cout << "买票-全价" << endl; }
-};
-class Student : public Person {
-public:
-	virtual void BuyTicket() { cout << "买票-半价" << endl; }
-};
-
-class S2 : public Student
 {
 public:
-	virtual void BuyTicket() { cout << "买票-免费" << endl; }
+	int a;
 };
-void Func(Person& p)
+//class B :public A
+class B :virtual public A
 {
-	p.BuyTicket();
-}
-
-void Func2(Student& p)
+public :
+	int b;
+};
+//class C :public A
+class C :virtual public A
 {
-	p.BuyTicket();
-}
-
+public:
+	int c;
+};
+class D : public B, public C
+{
+public:
+	int d;
+};
 int main()
 {
-	Person p;
-	Student s;
-	S2 s2;
-	/*p.BuyTicket();
-	s.BuyTicket();*/
-	//多态看实际指向的对象，调用对象对应类型的代码
-	//非多态看类型
-	Func(p);
-	Func(s);
-
-	Func2(s2);
-
+	D d;
+	cout << sizeof(d) << endl;
+	d.B::a = 1;
+	d.C::a = 2;
+	d.b = 3;
+	d.c = 4;
+	d.d = 5;
+	system("pause");
 	return 0;
 }
