@@ -20,8 +20,8 @@ public:
 	//sharedPtr<T> sp(new T)
 	SharedPtr(T* ptr)
 		:_ptr(ptr)
-		, _useCount(new int(1))
-		, _mtx(new mutex）
+		,_useCount(new int(1))
+		,_mtx(new mutex）
 	{}
 
 	SharedPtr(const SharedPtr<T>& sp)
@@ -35,7 +35,7 @@ public:
 	{
 		//两个智能指针管理同一片空间的情况，不需要进行赋值。                                                                                                                                                                                          
 		//if (this != &sp)
-		if (_ptr != sp._ptr)
+		if (_ptr!=sp._ptr)
 		{
 			if (--(*_useCount) == 0)
 			{
@@ -50,7 +50,7 @@ public:
 		}
 		return *this;
 	}
-
+	
 	~SharedPtr()
 
 	{
@@ -100,4 +100,4 @@ int main()
 	sp2 = sp;
 	//system("pause");
 	return 0;
-}
+
