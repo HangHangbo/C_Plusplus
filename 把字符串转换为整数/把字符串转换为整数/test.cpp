@@ -32,11 +32,18 @@ public:
 	}
 };
 
+//int main()
+//{
+//	Solution s;
+//	string s1;
+//	cin >> s1;
+//	int n=s.StrToInt(s1);
+//	return 0;
+//}
 int main()
 {
-	Solution s;
-	string s1;
-	cin >> s1;
-	int n=s.StrToInt(s1);
+	int a = 4;
+	int b = 5;
+	b = a--;
 	return 0;
 }
