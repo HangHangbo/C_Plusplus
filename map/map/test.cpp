@@ -83,10 +83,10 @@ void test_multimap()
 	{
 		cout << e.first << "->" << e.second << endl;
 	}
-	//lower_bound(key) 返回 <=key 第一个位置迭代器
+	//lower_bound(key) 返回 >=key 第一个位置迭代器
 	auto mit = testMap.lower_bound(2);
 	cout << mit->first << "--->" << mit->second << endl;
-	//upper_bound(key) 返回 >key 第一个位置迭代器
+	//upper_bound(key) 返回 <key 第一个位置迭代器
 	mit = testMap.upper_bound(2);
 	cout << mit->first << "--->" << mit->second << endl;
 }
