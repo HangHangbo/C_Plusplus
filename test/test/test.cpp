@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-//using namespace std;
+using namespace std;
 //int main()
 //{
 //	int num[4] = { 0 };
@@ -71,35 +71,62 @@
 //	p3 = &j;//(7)
 //	return 0;
 //}
-class A
+
+
+
+//class A
+//{
+//public:
+//	A() :m_iVal(0)
+//	{ 
+//		test();
+//	}	// 0
+//	virtual void func() { 
+//		std::cout << m_iVal; 
+//	}
+//	void test(){ func(); }
+//public:
+//	int m_iVal;
+//};
+//class B : public A
+//{
+//public:
+//	B(){ 
+//		test();
+//	}
+//	virtual void func()
+//	{
+//		++m_iVal;
+//		std::cout << m_iVal;     //1
+//	}
+//};
+//int main(int argc, char* argv[])
+//{
+//	A*p = new B;
+//	p->test();
+//	return 0;
+//}
+//typedef void (*fF)();
+
+int main()
 {
-public:
-	A() :m_iVal(0)
-	{ 
-		test();
-	}	// 0
-	virtual void func() { 
-		std::cout << m_iVal; 
-	}
-	void test(){ func(); }
-public:
-	int m_iVal;
-};
-class B : public A
-{
-public:
-	B(){ 
-		test();
-	}
-	virtual void func()
-	{
-		++m_iVal;
-		std::cout << m_iVal;     //1
-	}
-};
-int main(int argc, char* argv[])
-{
-	A*p = new B;
-	p->test();
+	
+	unsigned int n = 197;
+	n = (n & 0x55555555) + ((n >> 1) & 0x55555555);
+	n = (n & 0x33333333) + ((n >> 2) & 0x33333333);
+	n = (n & 0x0f0f0f0f) + ((n >> 4) & 0x0f0f0f0f);
+	n = (n & 0x00ff00ff) + ((n >> 8) & 0x00ff00ff);
+	n = (n & 0x0000ffff) + ((n >> 16) & 0x0000ffff);
+	system("pause");
 	return 0;
+}
+int BitCount4(unsigned int n)
+{
+	n = (n & 0x55555555) + ((n >> 1) & 0x55555555);
+	n = (n & 0x33333333) + ((n >> 2) & 0x33333333);
+	n = (n & 0x0f0f0f0f) + ((n >> 4) & 0x0f0f0f0f);
+	n = (n & 0x00ff00ff) + ((n >> 8) & 0x00ff00ff);
+	n = (n & 0x0000ffff) + ((n >> 16) & 0x0000ffff);
+
+	return n;
 }

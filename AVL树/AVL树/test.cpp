@@ -75,9 +75,21 @@ public:
 				cur = parent;
 				parent = parent->_pParent;
 			}
-			else if (parent->_bf = 2)
+			else if (parent->_bf == 2&&cur->_bf==1)
 			{
-
+				_RotateL(parent);
+			}
+			else if (parent->_bf == -2&&cur->_bf==-1)
+			{
+				_RotateR(parent);
+			}
+			else if (parent->_bf == 2 && cur->_bf == -1)
+			{
+				_RotateRL(parent);
+			}
+			else if (parent->_bf == -2 && cur->_bf == 1)
+			{
+				_RotateLR(parent);
 			}
 		}
 		return true;
@@ -89,14 +101,118 @@ public:
 		pNode NodeR = parent->_pRight;
 		pNode NodeRL = NodeR->_pLeft;
 		pNode Pparent = parent->_pParent;
-		NodeRL->_pParent = parent;
-		parent->_pRight=
+		//1.  对NodeRL 操作
+		//旋转后NodeR的左孩子，作为双亲的的右孩子
+		parent->_pRight = NodeRL;
+		//如果NodeR的左孩子存在跟新双亲节点
+		if (NodeRL)
+			NodeRL->_pParent = parent;
+
+		//2. 对parent操作
+		//parent作为NodeR的左孩子
+		parent->_pParent = NodeR;
+		//更新双亲节点
+		NodeR->_pLeft = parent;
+
+		//3.对NodeR 操作
+		NodeR->_pParent = Pparent;
+		if (Pparent == nullptr)
+		{
+			NodeR->_pParent = nullptr;
+			_root = NodeR;
+		}
+		//parent是子树 可能是双亲节点的左孩子或右孩子
+		else
+		{
+			if (Pparent->_pLeft = parent)
+				Pparent->_pLeft = NodeR;
+			else
+			{
+				Pparent->_pRight = NodeR;
+			}
+		}
+		//调整平衡因子
+		NodeR->_bf = 0;
+		parent->_bf = 0;
 	}
 	//单右旋
 	 void _RotateR(pNode parent)
 	{
+		 pNode NodeL = parent->_pLeft;	//parent 左孩子
+		 pNode NodeLR = NodeL->_pRight;	//parent 左孩子的右孩子
+		 pNode Pparent = parent->_pParent;	//parent 的父节点
+		 
+		 //1.  对NodeLR操作
+		 //旋转完成后NodeL的右孩子 作为双亲的左孩子
+		 parent->_pLeft = NodeLR;
+		 //如果 NodeL的右孩子存在，更新双亲节点
+		 if (NodeLR)
+			NodeLR->_pParent = parent;
 
+		 //2.  对parent操作
+		 //parent作为NodeL的右孩子
+		 parent->_pParent = NodeL;
+		 //更新双亲节点
+		 NodeL->_pRight = parent;
+
+		 //3. 对 NodeL操作
+		 
+		 NodeL->_pParent = Pparent;
+		 //如果parent是跟节点，更新NodeL为新的跟节点
+		 if (Pparent == nullptr)
+		 {
+			 _root = NodeL;
+			 NodeL->_pParent = nullptr;
+		 }
+		 //parent是子树，可能是双亲的左孩子也有可能是右孩子
+		 else
+		 {
+			 if (Pparent->_pLeft = parent)
+				 Pparent->_pLeft = NodeL;
+			 else
+			 {
+				 Pparent->_pRight = NodeL;
+			 }
+		 }
+		 //根据调整后的结构更新部分节点的平衡因子
+		 NodeL->_bf = 0;
+		 parent->_bf = 0;
+		 cout << "R over" << endl;
 	}
+	 //左右旋，新节点插入较高左子树的右侧
+	 void _RotateLR(pNode parent)
+	 {
+		 pNode NodeL = parent->_pLeft;
+		 pNode NodeLR = NodeL->_pRight;
+		 //记录NodeLR的平衡因子，两次旋转后需要用来调节平衡因子
+		 int bf = NodeLR->_bf;
+		 //左旋
+		 _RotateL(NodeL);
+		 //右旋
+		 _RotateR(parent);
+		 if (bf == -1)
+			 parent->_bf = 1;
+		 else if (bf == 1)
+			 NodeL->_bf = -1;
+	 }
+	 void _RotateRL(pNode parent)
+	 {
+		 pNode NodeR = parent->_pRight;
+		 pNode NodeRL = NodeR->_pLeft;
+
+		 int bf = NodeRL->_bf;
+		 _RotateR(NodeR);
+		 _RotateL(parent);
+		 if (bf == 1)
+		 {
+			 parent->_bf = -1;
+		 }
+		 else if (bf == -1)
+		 {
+			 NodeR->_bf = 1;
+		 }
+	 }
+
 	void Inorder()
 	{
 		_Inorder(_root);
@@ -118,37 +234,26 @@ private:
 
 int main()
 {
+	//16, 3, 7, 11, 9, 26, 18, 14, 15
 	AVLTree<int> bt;
-	bt.insert(5);
+	bt.insert(16);
 	bt.Inorder();
-	cout << endl;
 	bt.insert(3);
 	bt.Inorder();
-	cout << endl;
-	bt.insert(4);
-	bt.Inorder();
-	cout << endl;
-	bt.insert(1);
-	bt.Inorder();
-	cout << endl;
 	bt.insert(7);
 	bt.Inorder();
-	cout << endl;
-	bt.insert(8);
+	bt.insert(11);
 	bt.Inorder();
-	cout << endl;
-	bt.insert(2);
-	bt.Inorder();
-	cout << endl;
-	bt.insert(6);
-	bt.Inorder();
-	cout << endl;
-	bt.insert(0);
-	bt.Inorder();
-	cout << endl;
 	bt.insert(9);
 	bt.Inorder();
-	cout << endl;
+	bt.insert(26);
+	bt.Inorder();
+	bt.insert(18);
+	bt.Inorder();
+	bt.insert(14);
+	bt.Inorder();
+	bt.insert(15);
+	bt.Inorder();
 	system("pause");
 	return 0;
 }
