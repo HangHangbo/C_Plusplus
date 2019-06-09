@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-
+#include <vector>
 using namespace std;
 
 
@@ -142,26 +142,150 @@ int main()
 }
 #endif
 
-class A{
-public:
-	A(){ p(); }
-	virtual void p(){ printf("A"); }
-	virtual ~A(){ p(); }
-};
-class B:public A
+//class A{
+//public:
+//	A(){ p(); }
+//	virtual void p(){ printf("A"); }
+//	virtual ~A(){ p(); }
+//};
+//class B:public A
+//{
+//public:
+//	B(){ p(); }
+//	void p(){ printf("B"); }
+//	~B(){ p(); }
+//
+//private:
+//
+//};
+//int main()
+//{
+//	/*A*a = new B();
+//	delete a;*/
+//
+//	system("pause");
+//	return 0;
+//}
+
+//void c(int *a, int n)
+//{
+//	while (n)
+//	{
+//		*a++;
+//		a++;
+//		n--;
+//	}
+//	
+//}
+//int main()
+//{
+//	int a[] = { 1, 2, 3 };
+//	int n = 2;
+//	c(a, n);
+//	return 0;
+//}
+
+
+////统计每个月兔子的总数
+//#include <iostream>
+//
+//using namespace std;
+//
+//int main()
+//{
+//	int month;
+//	while (cin >> month)
+//	{
+//		int count = 0;
+//		int a = 0;
+//		int b = 1;
+//		for (int i = 1; i <= month; i++)
+//		{
+//			if (i == 2 || i == 1)
+//				count = 1;
+//			if (i>2)
+//			{
+//				count = a + b;
+//			}
+//			a = b;
+//			b = count;
+//		}
+//		cout << count << endl;
+//	}
+//	system("pause");
+//	return 0;
+//}
+
+////通配符匹配
+//bool  IsWildcard(string a, string b)
+//{
+//	int pos1;  //记录？下标
+//	int pos2;  //记录*下标
+//	string str;
+//	pos1 = a.find('?');
+//	pos2 = a.find('*');
+//	//通配符使用错误
+//
+//	//字母数字不匹配
+//}
+//
+//int main()
+//{
+//	string str1,str2;
+//	cin >> str1;
+//	cin >> str2;
+//	cout << IsWildcard(str1, str2) << endl;
+//	return 0;
+//}
+
+class bitMap
 {
 public:
-	B(){ p(); }
-	void p(){ printf("B"); }
-	~B(){ p(); }
+	bitMap(size_t bitcount)
+		:_bit((bitcount>>5)+1)
+		, _bitCount(bitcount)
+	{}
+	//置1
+	void Set(size_t which)
+	{
+		while (which > _bitCount)
+			return;
+		size_t index = which >> 5;
+		size_t pos = which % 32;
 
+		_bit[index] |= (1 << pos);
+	}
+	//置0
+	void ReSet(size_t which)
+	{
+		while (which > _bitCount)
+			return;
+		size_t index = which >> 5;
+		size_t pos = which % 5;
+
+		_bit[index] |= ~(1 << pos);
+	}
+	bool Test(size_t which)
+	{
+		while (which > _bitCount)
+			return false;
+		size_t index = which >> 5;
+		size_t pos = which % 5;
+		return _bit[index] & (1 << pos);
+	}
 private:
-
+	vector<int> _bit;
+	size_t _bitCount;
 };
+
 int main()
 {
-	A*a = new B();
-	delete a;
+	bitMap map(10);
+	map.Set(2);
+	map.Set(5);
+	map.Set(7);
+	map.ReSet(5);
+	cout << map.Test(5) << endl;
 	system("pause");
 	return 0;
 }
