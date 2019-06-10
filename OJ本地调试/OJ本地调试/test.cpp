@@ -217,75 +217,119 @@ int main()
 //}
 
 ////通配符匹配
-//bool  IsWildcard(string a, string b)
+//bool  IsWildcard(const char *cur, const char* ret)
 //{
-//	int pos1;  //记录？下标
-//	int pos2;  //记录*下标
-//	string str;
-//	pos1 = a.find('?');
-//	pos2 = a.find('*');
-//	//通配符使用错误
+//	//检查两个指针是否都走完
+//	if (*cur == '\0'&&*ret == '\0')
+//		return true;
+//	if (*cur == '\0' || *ret == '\0')
+//		return false;
 //
-//	//字母数字不匹配
+//	//
+//	if (*cur == '?')
+//		return IsWildcard(cur + 1, ret + 1);
+//	else if (*cur == '*')
+//		return IsWildcard(cur, ret + 1) || IsWildcard(cur + 1, ret) || IsWildcard(cur + 1, ret + 1);
+//	else if (*cur == *ret)
+//		return IsWildcard(cur + 1, ret + 1);
+//	return true;
 //}
 //
 //int main()
 //{
-//	string str1,str2;
-//	cin >> str1;
-//	cin >> str2;
-//	cout << IsWildcard(str1, str2) << endl;
+//	string str1, str2;
+//	while (cin >> str1 >> str2)
+//	{
+//		bool tmp = IsWildcard(str1.c_str(), str2.c_str());
+//		if (tmp == 1)
+//			cout << "true" << endl;
+//		else
+//			cout << "false" << endl;
+//	}
+//	system("pause");
 //	return 0;
 //}
 
-class bitMap
-{
-public:
-	bitMap(size_t bitcount)
-		:_bit((bitcount>>5)+1)
-		, _bitCount(bitcount)
-	{}
-	//置1
-	void Set(size_t which)
-	{
-		while (which > _bitCount)
-			return;
-		size_t index = which >> 5;
-		size_t pos = which % 32;
+//int main()
+//{
+//	int empty;
+//	while (cin >> empty)
+//	{
+//		int count = 0;
+//		int num = 0;
+//		while (empty>2)
+//		{
+//			num = empty / 3;
+//			count += num;
+//			empty = empty % 3 + num;
+//		}
+//		if (empty == 2)
+//			cout << count + 1 << endl;
+//		else
+//			cout << count << endl;
+//	}
+//	system("pause");
+//	return 0;
+//}
 
-		_bit[index] |= (1 << pos);
-	}
-	//置0
-	void ReSet(size_t which)
-	{
-		while (which > _bitCount)
-			return;
-		size_t index = which >> 5;
-		size_t pos = which % 5;
+//string getstring(const char *a,const char *b)
+//{
+//	string str;
+//	while (*a == *b)
+//	{
+//		str.push_back(*a);
+//	}
+//	return str;
+//}
+//int main()
+//{
+//	string str1, str2, result, max_result;
+//	cin >> str1 >> str2;
+//	const char *p1 = str1.c_str();
+//	
+//	while (p1)
+//	{
+//		const char *p2 = str2.c_str();
+//		while (p2)
+//		{
+//			if (*p1 == *p2)
+//				result = getstring(p1, p2);
+//			if (max_result.size()<result.size())
+//				max_result = result;
+//			p2++;
+//		}
+//		p1++;
+//	}
+//	cout << max_result << endl;
+//	system("pause");
+//	return 0;
+//}
 
-		_bit[index] |= ~(1 << pos);
-	}
-	bool Test(size_t which)
-	{
-		while (which > _bitCount)
-			return false;
-		size_t index = which >> 5;
-		size_t pos = which % 5;
-		return _bit[index] & (1 << pos);
-	}
-private:
-	vector<int> _bit;
-	size_t _bitCount;
-};
-
+//两个字符串ad求最长公共字符串
 int main()
 {
-	bitMap map(10);
-	map.Set(2);
-	map.Set(5);
-	map.Set(7);
-	map.ReSet(5);
-	cout << map.Test(5) << endl;
+	string a, b;
+	while (cin >> a >> b)
+	{
+		string result;
+		if (a.size() > b.size())
+			swap(a, b);
+		for (int i = 0; i < a.size(); i++)
+		{
+			for (int j = i; j < a.size(); j++)
+			{
+				string tmp = a.substr(i, j - i + 1);
+				if (b.find(tmp) + 1)
+				{
+					if (tmp.size()>result.size())
+						result = tmp;
+				}
+				else
+					break;
+			}
+		}
+		cout << result << endl;
+	}
 	system("pause");
 	return 0;
 }
