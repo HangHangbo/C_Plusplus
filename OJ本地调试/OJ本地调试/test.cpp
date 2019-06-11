@@ -306,30 +306,91 @@ int main()
 //}
 
 //两个字符串ad求最长公共字符串
+//int main()
+//{
+//	string a, b;
+//	while (cin >> a >> b)
+//	{
+//		string result;
+//		if (a.size() > b.size())
+//			swap(a, b);
+//		for (int i = 0; i < a.size(); i++)
+//		{
+//			for (int j = i; j < a.size(); j++)
+//			{
+//				string tmp = a.substr(i, j - i + 1);
+//				if (b.find(tmp) + 1)
+//				{
+//					if (tmp.size()>result.size())
+//						result = tmp;
+//				}
+//				else
+//					break;
+//			}
+//		}
+//		cout << result << endl;
+//	}
+//	system("pause");
+//	return 0;
+//}
+
+
+////求两个字符串中最长公共字符串
+//int main()
+//{
+//	string a, b;
+//	while (cin >> a >> b)
+//	{
+//		string result;
+//		if (a.size() > b.size())
+//			swap(a, b);
+//		for (int i = 0; i < a.size(); i++)
+//		{
+//			for (int j = i; j < a.size(); j++)
+//			{
+//				string tmp = a.substr(i, j - i + 1);
+//				if (b.find(tmp) + 1)
+//				{
+//					if (tmp.size()>result.size())
+//						result = tmp;
+//				}
+//				else
+//					break;
+//			}
+//		}
+//		cout << result.size() << endl;
+//	}
+//	system("pause");
+//	return 0;
+//}
+
+
+
 int main()
 {
-	string a, b;
-	while (cin >> a >> b)
+	vector<int> poker;
+	int num;
+	while (cin >> num)
 	{
-		string result;
-		if (a.size() > b.size())
-			swap(a, b);
-		for (int i = 0; i < a.size(); i++)
-		{
-			for (int j = i; j < a.size(); j++)
-			{
-				string tmp = a.substr(i, j - i + 1);
-				if (b.find(tmp) + 1)
-				{
-					if (tmp.size()>result.size())
-						result = tmp;
-				}
-				else
-					break;
-			}
-		}
-		cout << result << endl;
+		poker.push_back(num);
 	}
-	system("pause");
+		vector<int> result, left, right;
+		for (int i = poker.size(); i >= 0; i--)
+		{
+			if (i>(poker.size()) / 2)
+				right.push_back(poker[i]);
+			else
+				left.push_back(poker[i]);
+		}
+		for (int i = 0; i<right.size(); i++)
+		{
+			result.push_back(right[i]);
+			result.push_back(left[i]);
+		}
+		for (auto e : result)
+		{
+			cout << e << " ";
+		}
+		system("pause");
 	return 0;
 }
