@@ -368,29 +368,62 @@ int main()
 
 int main()
 {
-	vector<int> poker;
-	int num;
-	while (cin >> num)
+	int n,T,k;
+	cin >> T;
+	while (T--)
 	{
-		poker.push_back(num);
+		cin >> n >> k;
+		int num=2*n;
+		vector<int> poker(num);
+		for (int i = 0; i<num; i++)
+			cin >> poker[i];
+		while (k--){
+			vector<int> result(poker.begin(),poker.end());
+			int a = n;
+			int b = 0;
+			int c = 0;
+			int d = n;
+			while (d--)
+			{
+				poker[c++] = result[b++];
+				poker[c++] = result[a++];
+			}
+		}
+		for (int i = 0; i < num - 1; i++)
+		{
+			cout << poker[i] << " ";
+		}
+		cout << poker[num-1] << endl;
 	}
-		vector<int> result, left, right;
-		for (int i = poker.size(); i >= 0; i--)
-		{
-			if (i>(poker.size()) / 2)
-				right.push_back(poker[i]);
-			else
-				left.push_back(poker[i]);
-		}
-		for (int i = 0; i<right.size(); i++)
-		{
-			result.push_back(right[i]);
-			result.push_back(left[i]);
-		}
-		for (auto e : result)
-		{
-			cout << e << " ";
-		}
 		system("pause");
 	return 0;
 }
+
+
+//int main()
+//{
+//	int T, n, k;
+//	cin >> T;
+//	while (T--)
+//	{
+//		cin >> n >> k;
+//		int num = 2 * n;
+//		vector<int> table(num);
+//		for (int i = 0; i < num; ++i)
+//			cin >> table[i];
+//		while (k--)
+//		{
+//			vector<int> n1(table.begin(), table.end());
+//			for (int i = 0; i < n; ++i)
+//			{
+//				table[2 * i] = n1[i];
+//				table[2 * i + 1] = n1[i + n];
+//			}
+//		}
+//		for (int i = 0; i < num - 1; ++i)
+//			cout << table[i] << " ";
+//		cout << table[num - 1] << endl;
+//	}
+//	system("pause");
+//	return 0;
+//}
