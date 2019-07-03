@@ -365,39 +365,39 @@ int main()
 //}
 
 
-
-int main()
-{
-	int n,T,k;
-	cin >> T;
-	while (T--)
-	{
-		cin >> n >> k;
-		int num=2*n;
-		vector<int> poker(num);
-		for (int i = 0; i<num; i++)
-			cin >> poker[i];
-		while (k--){
-			vector<int> result(poker.begin(),poker.end());
-			int a = n;
-			int b = 0;
-			int c = 0;
-			int d = n;
-			while (d--)
-			{
-				poker[c++] = result[b++];
-				poker[c++] = result[a++];
-			}
-		}
-		for (int i = 0; i < num - 1; i++)
-		{
-			cout << poker[i] << " ";
-		}
-		cout << poker[num-1] << endl;
-	}
-		system("pause");
-	return 0;
-}
+//
+//int main()
+//{
+//	int n,T,k;
+//	cin >> T;
+//	while (T--)
+//	{
+//		cin >> n >> k;
+//		int num=2*n;
+//		vector<int> poker(num);
+//		for (int i = 0; i<num; i++)
+//			cin >> poker[i];
+//		while (k--){
+//			vector<int> result(poker.begin(),poker.end());
+//			int a = n;
+//			int b = 0;
+//			int c = 0;
+//			int d = n;
+//			while (d--)
+//			{
+//				poker[c++] = result[b++];
+//				poker[c++] = result[a++];
+//			}
+//		}
+//		for (int i = 0; i < num - 1; i++)
+//		{
+//			cout << poker[i] << " ";
+//		}
+//		cout << poker[num-1] << endl;
+//	}
+//		system("pause");
+//	return 0;
+//}
 
 
 //int main()
@@ -427,3 +427,199 @@ int main()
 //	system("pause");
 //	return 0;
 //}
+
+//
+//int Getprime(int a, int b)
+//{
+//	int prime;
+//	if (a>b)
+//		swap(a, b);
+//	for (int i = 1; i<=a; i++)
+//	{
+//		if (a%i == 0 && b%i == 0)
+//			prime = i;
+//	}
+//	return prime;
+//}
+//int main()
+//{
+//	int n, a;
+//	while (cin >> n >> a)
+//	{
+//		vector<int> mon(n);
+//		for (int i = 0; i < n; i++)
+//		{
+//			int num;
+//			cin >> num;
+//			mon[i] = num;
+//		}
+//		int c = a;
+//		for (const auto e : mon)
+//		{
+//			if (c >= e)
+//				c += e;
+//			else
+//				c += Getprime(c, e);
+//		}
+//		cout << c << endl;
+//	}
+//	system("pause");
+//	return 0;
+//}
+
+//int main()
+//{
+//	string str;
+//	while (cin >> str)
+//	{
+//		int i;
+//		for (i = 0; i<str.size(); i++)
+//		{
+//			if (str.find(str[i]) == str.rfind(str[i]))
+//			{
+//				cout << str[i] << endl;
+//				break;
+//			}
+//		}
+//		if (i == str.size())
+//			cout << -1 << endl;
+//
+//	}
+//	return 0;
+//}
+
+//#include <stack>
+//int main()
+//{
+//	string str1, str2;
+//	while (cin >> str1 >> str2)
+//	{
+//		stack<int> s1, s2;
+//		auto it1 = str1.begin();
+//		auto it2 = str2.begin();
+//		s1.push(*it1);
+//		s2.push(*it2);
+//		while (it1 != str2.end() || it2 != str2.end())
+//		{
+//
+//		}
+//	}
+//		
+//	return 0;
+//}
+//
+//int Getsecond(vector<int> s){
+//	//获取矩阵平方的左上角
+//
+//}
+//
+//void Getsult(int result,string *RealResult){
+//	//对输出结果进行判断病修改
+//}
+//int main(){
+//	int n;
+//	while (cin >> n){
+//		vector<int> arr;
+//		for (int i = 0; i < n; i++){
+//			int num = 0;
+//			cin >> num;
+//			arr.push_back(num);
+//		}
+//		int first = arr[0];
+//		int second =Getsecond(arr);
+//		int result = first;
+//		string RealRes = 0;
+//		if (n == 1){
+//			Getsult(result,&RealRes);
+//		}
+//		else if (n == 2){
+//			Getsult(second, &RealRes);
+//		}
+//		else
+//		{
+//			for (int i = 0; i < n; i++){
+//				result = first + second;
+//				first = second;
+//				second = result;
+//			}
+//			Getsult(result, &RealRes);
+//		}
+//		cout << RealRes << endl;
+//	}
+//	system("system");
+//	return 0;
+//}
+
+//int a[10005] = { 0, 1, 2, 3, 5 };
+//void data_init()
+//{
+//	int i;
+//	for (i = 3; i<10005; i++)
+//	{
+//		a[i] = a[i - 1] + a[i - 2];
+//		if (a[i] >= 10000) a[i] %= 10000;
+//	}
+//}
+//
+////6
+////18 15 21 13 25 27
+//int main()
+//{
+//	int n, t;
+//	data_init();
+//	while (cin>>n)
+//	{
+//		while (n--)
+//		{
+//			cin >> t;
+//			printf("%04d", a[t]);
+//		}
+//		printf("\n");
+//	}
+//	system("pause");
+//	return 0;
+//}
+//
+
+//
+//int getroot(int origin) {
+//	if (origin < 10) {
+//		return origin;
+//	}
+//	int sum = 0;
+//	while (origin > 0) {
+//		sum += origin % 10;
+//		origin /= 10;
+//	}
+//	if (sum >= 10) {
+//		sum = getroot(sum);
+//	}
+//	return sum;
+//}
+//int main(){
+//	string s;
+//	while (cin >> s){
+//		int num=0;
+//		for (auto e : s){
+//			num += e - '0';
+//		}
+//		int a = getroot(num);
+//		cout << a << endl;
+//	}
+//	system("pause");
+//	return 0;
+//}
+
+
+int main(){
+	double cat = 0;
+	double blow = 0;
+	while (std::cin >> cat >> blow){
+		if (cat*3.14<blow)
+			std::cout << "Yes" << std::endl;
+		else
+			std::cout << "No" << std::endl;
+	}
+	system("pause");
+	return 0;
+}
