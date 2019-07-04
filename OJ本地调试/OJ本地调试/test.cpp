@@ -611,15 +611,72 @@ int main()
 //}
 
 
-int main(){
-	double cat = 0;
-	double blow = 0;
-	while (std::cin >> cat >> blow){
-		if (cat*3.14<blow)
-			std::cout << "Yes" << std::endl;
-		else
-			std::cout << "No" << std::endl;
+//int main(){
+//	double cat = 0;
+//	double blow = 0;
+//	while (std::cin >> cat >> blow){
+//		if (cat*3.14<blow)
+//			std::cout << "Yes" << std::endl;
+//		else
+//			std::cout << "No" << std::endl;
+//	}
+//	system("pause");
+//	return 0;
+//}
+#include <stack>
+class Solution {
+public:
+	/**
+	*  奇数位上都是奇数或者偶数位上都是偶数
+	*  输入：数组arr，长度大于2
+	*  len：arr的长度
+	*  将arr调整成奇数位上都是奇数或者偶数位上都是偶数
+	*/
+	void oddInOddEvenInEven(vector<int>& arr, int len) {
+		stack<int> odd_s;
+		stack<int> even_s;
+		for (auto e : arr){
+			if (e % 2 == 1){
+				//奇数
+				odd_s.push(e);
+			}
+			else{
+				//偶数
+				even_s.push(e);
+			}
+			int i = 0;
+			while (!odd_s.empty() && !even_s.empty()){
+				int odd = odd_s.top();
+				arr[i + 1] = odd;
+				int even = even_s.top();
+				arr[i] = even;
+				odd_s.pop(), even_s.pop();
+				i += 2;
+			}
+			if (!odd_s.empty()){
+				for (int j = i; j < len; j++){
+					arr[j] = odd_s.top();
+					odd_s.pop();
+				}
+			}
+			else if (!even_s.empty()){
+				for (int j = i; j < len; j++){
+					arr[j] = even_s.top();
+					even_s.pop();
+				}
+			}
+
+		}
+		
 	}
-	system("pause");
+};
+int main(){
+	Solution s;
+	vector<int> arr;
+	arr.push_back(1);
+	arr.push_back(2);
+	arr.push_back(3);
+	arr.push_back(4);
+	s.oddInOddEvenInEven(arr, 4);
 	return 0;
 }
