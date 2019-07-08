@@ -819,28 +819,121 @@
 //		return before + 1;
 //	}
 //};
+//
+//#include <iostream>
+//#include <string>
+//using namespace std;
+//int main(){
+//	string sou;
+//	while (getline(cin,sou)){
+//		string dec;
+//		for (int i = 0; i < sou.size(); i++){
+//			if (sou[i] == ' '){
+//				dec.push_back(' ');
+//				continue;
+//			}
+//			char num = (sou[i]-5);
+//			if (num < 'A')
+//				num += 26;
+//			dec.push_back(num);
+//		}
+//		cout << dec<< endl;
+//	}
+//	return 0;
+//}
+
+
+
+//复杂度过高
+//#include <iostream>
+//#include <set>
+//
+//using namespace std;
+//bool isPrime(int num){
+//	for (int i = 2; i < num; i++){
+//		if (num%i == 0)
+//			return false;
+//	}
+//	return true;
+//}
+//void getDiv(int num, set<int> &Set){
+//	if (num <2){
+//		return;
+//	}
+//	if (num==2||isPrime(num)){
+//		Set.insert(num);
+//		return;
+//	}
+//	for (int i = 2; i < num; i++){
+//		if (num%i == 0){
+//			getDiv(i,Set);
+//		}
+//	}
+//}
+//int main(){
+//	int num;
+//	while (cin >> num){
+//		if (num<=3||isPrime(num))  //素数直接输出0
+//			cout << 0 << endl;
+//		else{                        //非素数
+//			set<int> Set;
+//			getDiv(num, Set);
+//			cout << Set.size() << endl;
+//		}
+//	}
+//	return 0;
+//}
+
+
+//#include <iostream>
+//#include <vector>
+//using namespace std;
+//bool isPrime(int num){
+//	for (int i = 2; i < num; i++){
+//		if (num%i == 0)
+//			return false;
+//	}
+//	return true;
+//}
+//void getPrime(int num, vector<int> &arr){
+//	for (int i = 2; i < num; i++){
+//		if (isPrime(i))
+//			arr.push_back(i);
+//	}
+//}
+//int main(){
+//	int num;
+//	while (cin >> num){
+//		vector<int> arr;
+//		getPrime(num, arr);
+//		int count = 0;
+//		for (auto e : arr){
+//			if (num%e == 0)
+//				count++;
+//		}
+//		cout<<count<<endl;
+//	}
+//	return 0;
+//}
 
 #include <iostream>
-#include <string>
+#include<math.h>
 using namespace std;
 int main(){
-
-	string sou;
-	while (cin>>sou){
-		string dec;
-		for (int i = 0; i < sou.size(); i++){
-			if (sou[i] == ' '){
-				dec.push_back(' ');
-				continue;
+	int n, k, i;
+	while (cin >> n){
+		k = 0;
+		for (i = 2; i <= sqrt(n); i++){
+			if (n%i == 0){
+				while (n%i == 0){
+					n = n / i;
+				}
+				k++;
 			}
-			char num = (sou[i]-5);
-			if (num < 'A')
-				num += 26;
-			dec.push_back(num);
 		}
-		cout << dec << endl;
-		//printf("%s", dec);
+		if (n != 1)
+			k++;
+		cout << k << endl;
 	}
-
 	return 0;
 }
