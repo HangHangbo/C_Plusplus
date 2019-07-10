@@ -916,24 +916,242 @@
 //	return 0;
 //}
 
+//#include <iostream>
+//#include<math.h>
+//using namespace std;
+//int main(){
+//	int n, k, i;
+//	while (cin >> n){
+//		k = 0;
+//		for (i = 2; i <= sqrt(n); i++){
+//			if (n%i == 0){
+//				while (n%i == 0){
+//					n = n / i;
+//				}
+//				k++;
+//			}
+//		}
+//		if (n != 1)
+//			k++;
+//		cout << k << endl;
+//	}
+//	return 0;
+//}
+
+//#include <iostream>
+//#include <string>
+//using namespace std;
+//
+////马丁
+//int Martin(int y,int m,int d){
+//	int w = (d + 2 * m + 3 * (m + 1) / 5 + y + y / 4 - y / 100 + y / 400 + 1) % 7;
+//	if (w == 1)
+//		return d + 14;
+//	else if (w == 2)
+//		return d + 20;
+//	else if (w == 3)
+//		return d + 19;
+//	else if (w == 4)
+//		return d + 18;
+//	else if (w == 5)
+//		return d + 17;
+//	else if (w == 6)
+//		return d + 16;
+//	else if (w == 7)
+//		return d + 15;
+//}
+////总统
+//int President(int y, int m, int d){
+//	int w = (d + 2 * m+3*(m + 1) / 5 + y + y / 4 - y / 100 + y / 400+1) % 7;
+//	if (w == 1)
+//		return d + 14;
+//	else if (w == 2)
+//		return d + 20;
+//	else if (w == 3)
+//		return d + 19;
+//	else if (w == 4)
+//		return d + 18;
+//	else if (w == 5)
+//		return d + 17;
+//	else if (w == 6)
+//		return d + 16;
+//	else if (w == 7)
+//		return d + 15;
+//}
+//int Memorial(int y, int m, int d){
+//	int w = (d + 2 * m + 3 * (m + 1) / 5 + y + y / 4 - y / 100 + y / 400 + 1) % 7;
+//	if (w == 1)
+//		return d;
+//	else if (w == 2)
+//		return d - 1;
+//	else if (w == 3)
+//		return d - 2;
+//	else if (w == 4)
+//		return d - 3;
+//	else if (w == 5)
+//		return d - 4;
+//	else if (w == 6)
+//		return d - 5;
+//	else if (w == 7)
+//		return d - 6;
+//}
+//
+//int Labour(int y, int m, int d){
+//	int w = (d + 2 * m + 3 * (m + 1) / 5 + y + y / 4 - y / 100 + y / 400 + 1) % 7;
+//	switch (w){
+//	case 1:return d; break;
+//	case 2:return d+6; break;
+//	case 3:return d+5; break;
+//	case 4:return d+4; break;
+//	case 5:return d+3; break;
+//	case 6:return d+2; break;
+//	case 7:return d+1; break;
+//	}
+//}
+//int main(){
+//	int year;
+//	while (cin >> year){
+//		//元旦
+//		cout << year << "-" << "01" << "-" << "01"<< endl;
+//		//马丁
+//		int day=Martin(year-1,13,1);
+//		cout << year << "-" << "01"<<"-" << day << endl;
+//		//总统节
+//		day = President(year-1, 14, 1);
+//		cout << year << "-" << "02" << "-" << day << endl;
+//		//阵亡将士纪念日
+//		day = Memorial(year, 5, 31);
+//		cout << year << "-" << "05" << "-" << day << endl;
+//		//国庆
+//		cout << year << "-" << "07" << "-" << "04" << endl;
+//		//劳动节
+//		day = Labour(year, 9, 1);
+//		if (day > 9)
+//			cout << year << "-" << "09" << "-" << day << endl;
+//		else{
+//			cout << year << "-" << "09" << "-" <<0<< day << endl;
+//		}
+//	}
+//	return 0;
+//}
+
+//// write your code here cpp
+//#include <iostream>
+//#include <vector>
+//#include <cmath>
+//using namespace std;
+//
+//int main(){
+//	int num;
+//	while (cin >> num){
+//		vector<int> s;
+//		int cur = num;
+//		for (int i = 2; i <= sqrt(cur); i++){
+//			if (num%i == 0){
+//				s.push_back(i);
+//				num = num / i;
+//				while (num%i == 0){
+//					s.push_back(i);
+//					num = num / i;
+//				}
+//			}
+//		}
+//		if (s.empty()){
+//			cout << cur << " " << "=" << " " << num;
+//		}
+//		else{
+//			cout << cur << " " << "=";
+//			for (int i = 0; i < s.size() - 1; i++){
+//				cout << " " << s[i] << " " << "*";
+//			}
+//			cout << " " << s[s.size() - 1]<<" ";
+//			if (num != 1)
+//				cout << "*" << " " << num;
+//		}
+//		cout << endl;
+//	}
+//	return 0;
+//}
+
+
+//#include <iostream>
+//
+//using namespace std;
+//struct Data
+//{
+//	int year;
+//	int month;
+//	int day;
+//};
+//bool isLeap(int y){
+//	if ((y % 4 == 0 && y % 100 != 0) || (y % 400 == 0))
+//		return true;
+//	return false;
+//}
+//
+//int main(){
+//	Data begin,end;
+//	while (cin >> begin.year >> begin.month >> begin.day >> end.year >> end.month >> end.day){
+//		//素数 2 3 5 7 11 每天赚1 否则每天赚2块
+//		int sum = 0;
+//		while (begin.year != end.year&&begin.month != end.month&&begin.day != end.day){
+//
+//		}
+//	}
+//	return 0;
+//}
 #include <iostream>
-#include<math.h>
 using namespace std;
+
 int main(){
-	int n, k, i;
-	while (cin >> n){
-		k = 0;
-		for (i = 2; i <= sqrt(n); i++){
-			if (n%i == 0){
-				while (n%i == 0){
-					n = n / i;
-				}
-				k++;
-			}
+	int year1, month1, day1, year2, month2, day2;
+	int d[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+	while (cin >> year1 >> month1 >> day1 >> year2 >> month2 >> day2)
+	{
+		int sum = 0;
+		int year = year1;
+
+		//时间区间有一整年
+		//先判断是否为闰年
+		for (int i = year1; i <= year2 - 1; ++i){
+			if ((i % 4 == 0 && i % 100 != 0) || i % 400 == 0) 
+				sum += 580;     //平年
+			else  sum += 579;	//闰年
 		}
-		if (n != 1)
-			k++;
-		cout << k << endl;
+
+		//起始月份的前半部分收益去掉
+		for (int i = 0; i <= month1 - 1; ++i){
+			int temp = 0;
+			if (i == month1 - 1) 
+				temp = day1 - 1;
+			else 
+				temp = d[i];
+			
+			if (i != 1 && i != 2 && i != 4 && i != 6 && i != 10){ 
+				sum -= temp * 2;
+			}
+			else 
+				sum -= temp;
+		}
+
+		//结束月份的后半部分收益去掉
+		for (int i = 0; i <= month2 - 1; ++i){
+			int temp = 0;
+			if (i == month2 - 1) 
+				temp = day2;
+			else 
+				temp = d[i];
+			if (i != 1 && i != 2 && i != 4 && i != 6 && i != 10){ 
+				sum += temp * 2;
+			}
+			else
+				sum += temp;
+		}
+
+		cout << sum << endl;
+
 	}
+
+
 	return 0;
 }
