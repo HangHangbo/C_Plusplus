@@ -1100,58 +1100,116 @@
 //	}
 //	return 0;
 //}
+//#include <iostream>
+//using namespace std;
+//
+//int main(){
+//	int year1, month1, day1, year2, month2, day2;
+//	int d[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+//	while (cin >> year1 >> month1 >> day1 >> year2 >> month2 >> day2)
+//	{
+//		int sum = 0;
+//		int year = year1;
+//
+//		//时间区间有一整年
+//		//先判断是否为闰年
+//		for (int i = year1; i <= year2 - 1; ++i){
+//			if ((i % 4 == 0 && i % 100 != 0) || i % 400 == 0) 
+//				sum += 580;     //平年
+//			else  sum += 579;	//闰年
+//		}
+//
+//		//起始月份的前半部分收益去掉
+//		for (int i = 0; i <= month1 - 1; ++i){
+//			int temp = 0;
+//			if (i == month1 - 1) 
+//				temp = day1 - 1;
+//			else 
+//				temp = d[i];
+//			
+//			if (i != 1 && i != 2 && i != 4 && i != 6 && i != 10){ 
+//				sum -= temp * 2;
+//			}
+//			else 
+//				sum -= temp;
+//		}
+//
+//		//结束月份的后半部分收益去掉
+//		for (int i = 0; i <= month2 - 1; ++i){
+//			int temp = 0;
+//			if (i == month2 - 1) 
+//				temp = day2;
+//			else 
+//				temp = d[i];
+//			if (i != 1 && i != 2 && i != 4 && i != 6 && i != 10){ 
+//				sum += temp * 2;
+//			}
+//			else
+//				sum += temp;
+//		}
+//
+//		cout << sum << endl;
+//
+//	}
+//
+//
+//	return 0;
+//}
+
 #include <iostream>
+#include <string>
+
 using namespace std;
 
+
 int main(){
-	int year1, month1, day1, year2, month2, day2;
-	int d[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-	while (cin >> year1 >> month1 >> day1 >> year2 >> month2 >> day2)
-	{
-		int sum = 0;
-		int year = year1;
-
-		//时间区间有一整年
-		//先判断是否为闰年
-		for (int i = year1; i <= year2 - 1; ++i){
-			if ((i % 4 == 0 && i % 100 != 0) || i % 400 == 0) 
-				sum += 580;     //平年
-			else  sum += 579;	//闰年
-		}
-
-		//起始月份的前半部分收益去掉
-		for (int i = 0; i <= month1 - 1; ++i){
-			int temp = 0;
-			if (i == month1 - 1) 
-				temp = day1 - 1;
-			else 
-				temp = d[i];
-			
-			if (i != 1 && i != 2 && i != 4 && i != 6 && i != 10){ 
-				sum -= temp * 2;
+	string s, t;
+	while (cin >> s >> t){
+		int sum = 0;         //能剪几块布
+		for (int i = 0; i < s.size(); ){
+			int j = i;
+			int o = 0;       //
+			for (auto e : t){
+				if (e == s[j]){
+					j++;
+					o++;
+				}
+				else{
+					j = i + 1;
+					break;
+				}
+				if (o == t.size())
+					sum++;
 			}
-			else 
-				sum -= temp;
+			i = j;
 		}
-
-		//结束月份的后半部分收益去掉
-		for (int i = 0; i <= month2 - 1; ++i){
-			int temp = 0;
-			if (i == month2 - 1) 
-				temp = day2;
-			else 
-				temp = d[i];
-			if (i != 1 && i != 2 && i != 4 && i != 6 && i != 10){ 
-				sum += temp * 2;
-			}
-			else
-				sum += temp;
-		}
-
 		cout << sum << endl;
-
 	}
-
 
 	return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
