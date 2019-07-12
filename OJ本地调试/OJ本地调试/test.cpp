@@ -1156,40 +1156,97 @@
 //	return 0;
 //}
 
+//#include <iostream>
+//#include <string>
+//
+//using namespace std;
+//
+//
+//int main(){
+//	string s, t;
+//	while (cin >> s >> t){
+//		int sum = 0;         //能剪几块布
+//		for (int i = 0; i < s.size(); ){
+//			int j = i;
+//			int o = 0;       //
+//			for (auto e : t){
+//				if (e == s[j]){
+//					j++;
+//					o++;
+//				}
+//				else{
+//					j = i + 1;
+//					break;
+//				}
+//				if (o == t.size())
+//					sum++;
+//			}
+//			i = j;
+//		}
+//		cout << sum << endl;
+//	}
+//
+//	return 0;
+//}
+
+//#include <iostream>
+//#include <string>
+//#include <vector>
+//
+//using namespace std;
+//
+//int main(){
+//	int num;
+//	while (cin>>num){
+//		cin.get();
+//		vector<string> NameList(num);
+//		for (int i = 0; i < num; i++){
+//			string name;
+//			getline(cin, name);
+//			NameList[i]=name;
+//		}
+//		for (int i = 0; i < num;i++){
+//			if (string::npos!=NameList[i].find(',',0))
+//				cout << '"' << NameList[i]<< '"' ;
+//			else
+//				cout << NameList[i];
+//			if (i < num - 1)
+//				cout << ',' << " ";
+//		}
+//		cout << endl;
+//	}
+//	return 0;
+//}
+// write your code here cpp
 #include <iostream>
-#include <string>
 
 using namespace std;
-
-
 int main(){
-	string s, t;
-	while (cin >> s >> t){
-		int sum = 0;         //能剪几块布
-		for (int i = 0; i < s.size(); ){
-			int j = i;
-			int o = 0;       //
-			for (auto e : t){
-				if (e == s[j]){
-					j++;
-					o++;
-				}
-				else{
-					j = i + 1;
-					break;
-				}
-				if (o == t.size())
-					sum++;
-			}
-			i = j;
+	int day;
+	while (cin >> day){
+		long long a = 1;
+		long long b = 2;
+		long long c;
+		if (day == 1){
+			cout << 1 << endl;
+			break;
 		}
-		cout << sum << endl;
-	}
+		else if (day == 2){
+			cout << 2 << endl;
+		}
+		else {
+			day -= 2;
+			while (day--){
+				c = a + b;
+				a = b;
+				b = c;
+			}
+			cout << c << endl;
+		}
 
+	}
 	return 0;
 }
-
-
 
 
 
