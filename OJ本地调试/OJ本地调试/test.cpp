@@ -1218,39 +1218,55 @@
 //	return 0;
 //}
 // write your code here cpp
-#include <iostream>
+//#include <iostream>
+//
+//using namespace std;
+//int main(){
+//	int day;
+//	while (cin >> day){
+//		long long a = 1;
+//		long long b = 2;
+//		long long c;
+//		if (day == 1){
+//			cout << 1 << endl;
+//			break;
+//		}
+//		else if (day == 2){
+//			cout << 2 << endl;
+//		}
+//		else {
+//			day -= 2;
+//			while (day--){
+//				c = a + b;
+//				a = b;
+//				b = c;
+//			}
+//			cout << c << endl;
+//		}
+//
+//	}
+//	return 0;
+//}
+//
+//
+//
 
+#include <iostream>
+#include <cmath>
 using namespace std;
 int main(){
-	int day;
-	while (cin >> day){
-		long long a = 1;
-		long long b = 2;
-		long long c;
-		if (day == 1){
-			cout << 1 << endl;
-			break;
-		}
-		else if (day == 2){
-			cout << 2 << endl;
-		}
-		else {
-			day -= 2;
-			while (day--){
-				c = a + b;
-				a = b;
-				b = c;
+	double num;
+	while (cin >> num){
+			double count=1;
+			for (double i = 0; i < num - 1; i++){
+				double a = num - i;
+				count *= (a - 1) / a;
 			}
-			cout << c << endl;
-		}
-
+			printf("%0.2lf%%\n", count);
 	}
+
 	return 0;
 }
-
-
-
-
 
 
 
