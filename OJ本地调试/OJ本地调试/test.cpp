@@ -612,8 +612,8 @@
 ////
 ////
 //////int main(){
-//////	double cat = 0;
-//////	double blow = 0;
+//////	double long cat = 0;
+//////	double long blow = 0;
 //////	while (std::cin >> cat >> blow){
 //////		if (cat*3.14<blow)
 //////			std::cout << "Yes" << std::endl;
@@ -693,8 +693,8 @@
 //////		if (n == 0)
 //////			break;
 //////		
-//////			long long int a = pow(5, n) - 4;
-//////			long long int b = pow(4, n) + n - 4;
+//////			double long int a = pow(5, n) - 4;
+//////			double long int b = pow(4, n) + n - 4;
 //////			cout << a << " " << b << endl;
 //////	}
 //////	system("pause");
@@ -1224,9 +1224,9 @@
 //int main(){
 //	int day;
 //	while (cin >> day){
-//		long long a = 1;
-//		long long b = 2;
-//		long long c;
+//		double long a = 1;
+//		double long b = 2;
+//		double long c;
 //		if (day == 1){
 //			cout << 1 << endl;
 //			break;
@@ -1251,38 +1251,295 @@
 //
 //
 
-#include <iostream>
-#include <cmath>
-using namespace std;
-int main(){
-	double num;
-	while (cin >> num){
-			double count=1;
-			for (double i = 0; i < num - 1; i++){
-				double a = num - i;
-				count *= (a - 1) / a;
-			}
-			printf("%0.2lf%%\n", count);
-	}
+//#include <iostream>
+//
+//
+//using namespace std;
+//double D( double num){
+//	//错排的所有排法
+//	if (num == 1)
+//		return 0;
+//	if (num == 2)
+//		return 1;
+//	return (num-1)*(D(num - 1) + D(num - 2));
+//}
+//
+//double T( double num){
+//	//随机排法
+//	if (num == 1)
+//		return 1;
+//	return num*T(num - 1);
+//}
+//int main(){
+//	register double num;
+//	while (cin >> num){
+//		 double False = D(num);
+//		 double True = T(num);
+//		 double count = False / True;
+//		printf("%0.2lf%%\n", count*100);
+//	}
+//
+//	return 0;
+//}
 
+
+
+//#include <iostream>
+//#include <iomanip>
+//using namespace std;
+//
+//
+//double fac(int x)
+//{
+//	register double i, f = 1;  //定义寄存器变量  
+//	for (int i = 1; i <= x; i++)
+//		f *= i;
+//	return f;
+//}
+//
+//
+//int main()
+//{
+//	int n;
+//	long long a[21] = { 0, 0, 1 };
+//	for (int i = 3; i < 21; i++)
+//	{
+//		a[i] = (i - 1)*(a[i - 1] + a[i - 2]);
+//	}
+//	while (cin >> n)
+//	{
+//		double tempAll = fac(n);
+//		cout << fixed << setprecision(2) << (double)a[n] / tempAll * 100 << "%" << endl;
+//	}
+//}
+
+//#include <iostream>
+//#include <vector>
+//#include <string>
+//
+//using namespace std;
+//int main(){
+//	string first, second;
+//	while (getline(cin, first)&&getline(cin,second)){
+//		vector<string> Namelist;
+//
+//		//将first中的每一个名字写入Namelist
+//		auto it = first.begin();
+//		while (it != first.end()){
+//			if (*it == ',' || *it == ' ')
+//				it++;
+//			else if (*it == '"'){
+//				it++;
+//				string name;
+//				while (*it != '"'){
+//					name += *it;
+//					it++;
+//				}
+//				Namelist.push_back(name);
+//				it++;
+//			}
+//			else{
+//				string name;
+//				while (it != first.end()&&*it != ','){
+//					name += *it;
+//						it++;
+//				}
+//				if (it != first.end())
+//					it++;
+//				Namelist.push_back(name);
+//			}
+//		}
+//		bool have = 0;
+//		for (auto e : Namelist){
+//			if (e == second){
+//				have = 1;
+//				break;
+//			}
+//		}
+//		if (have)
+//			cout << "Ignore" << endl;
+//		else
+//		cout << "Important!" << endl;
+//	}
+//	return 0;
+//}
+//
+
+//#include <iostream>
+//#include <string>
+//
+//struct Rat{
+//	long int car; //进位
+//	long int num; //分子
+//	long int den; //分母
+//	bool flog=1;  //标识为  1 代表非0
+//};
+//
+//void handler(std::string &str,Rat &rat){
+//	if (str[0] == 0){
+//		//分子为0
+//		rat.flog = 0;
+//		return;
+//	}
+//	long int num = (str[0]-'0') % (str[2]-'0');  //分子  num
+//	long int car = (str[0]-'0') / (str[2]-'0');	//进位  car
+//	rat.num = num;
+//	rat.car = car;
+//	rat.den = (str[2]-'0');
+//}
+//int main(){
+//	std::string lhs, rhs;
+//	while (std::cin >> lhs >> rhs){
+//		//  A/B C/D
+//		Rat Left, Right;
+//		handler(lhs,Left);
+//		handler(rhs,Right);
+//		//  A/B  E   C/D F
+//		while (1);
+//		//相加
+//		std::string result_Add;
+//		
+//	}
+//	return 0;
+//}
+
+#include <iostream>
+#include <vector>
+#include <string>
+#include <set>
+#include <map>
+using namespace std;
+map<char, int> Map;
+
+void getNumber(string &num){
+	string str;
+	for (int i = 0; i < num.size();i++){
+		if (num[i] >= '0'&&num[i] <= '9')
+			str.push_back((int)num[i]);
+		else if (num[i] == '-')
+			continue;
+		else{
+			int exp = (int)Map[num[i]];
+			str.push_back(exp);
+		}
+	}
+	num = str;
+}
+
+int main(){
+	for (char i = 'A'; i <= 'Z'; i++){
+		if (i < 'D'){
+			Map.insert(make_pair(i, 2));
+		}
+		else if (i < 'G'){
+			Map.insert(make_pair(i, 3));
+		}
+		else if (i < 'J'){
+			Map.insert(make_pair(i, 4));
+		}
+		else if (i < 'M'){
+			Map.insert(make_pair(i, 5));
+		}
+		else if (i < 'P'){
+			Map.insert(make_pair(i, 6));
+		}
+		else if (i < 'T'){
+			Map.insert(make_pair(i, 7));
+		}
+		else if (i < 'W'){
+			Map.insert(make_pair(i, 8));
+		}
+		else if (i <='Z'){
+			Map.insert(make_pair(i, 9));
+		}
+	}
+	int num;
+	while (cin >> num){
+		vector<string> PhoneNum;
+		string number;
+		for (int i = 0; i<num; i++){
+			cin >> number;
+			getNumber(number);
+			PhoneNum.push_back(number);
+		}
+		//去重
+		auto it1 = PhoneNum.begin();
+		while (it1 != PhoneNum.end()){
+			auto it2 = it1++;
+			while (it2 != PhoneNum.end()){
+				if (*it1 == *it2)
+					it2 = PhoneNum.erase(it2);
+				
+				else
+					it2++;
+			}
+			it1++;
+		}
+		for (auto e : PhoneNum){
+			for (int i = 0; i < 7; i++){
+				if (i == 3)
+					cout << "-";
+				cout << e[i];
+			}
+			cout << endl;
+		}
+	}
 	return 0;
 }
 
 
 
+//#include <iostream>
+//#include <string>
+//
+//using namespace std;
+//
+//int main(){
+//	string str;
+//	while (getline(cin, str)){
+//		auto it = str.begin();
+//		while (it != str.end()){
+//			if (*it == '_'){
+//				it = str.erase(it);
+//				*it -= 32;
+//			}
+//			it++;
+//		}
+//		cout << str << endl;
+//	}
+//	return 0;
+//}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+//#include <iostream>
+//#include <vector>
+//#include <string>
+//
+//using namespace std;
+//
+//int main(){
+//	string str;
+//	while (getline(cin, str)){
+//		vector<string> result;
+//		string arr;
+//		for (int i = 0; i < str.size();i++){
+//			//遇到空格
+//			if (str[i] == ' '){
+//				if (!arr.empty()&&arr[0]!=' ')
+//					result.push_back(arr);
+//				arr.clear();
+//			}
+//			else
+//				arr.push_back(str[i]);
+//		}
+//		result.push_back(arr);
+//		reverse(result.begin(), result.end());
+//		for (auto e : result){
+//			cout << e << ' ';
+//		}
+//		cout << endl;
+//	}
+//	return 0;
+//}
 
 
