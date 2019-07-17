@@ -2,17 +2,22 @@
 #include <cmath>
 #include <cstring>
 #include <fstream>
+#include <string>
 #define N 64
 
 class MD5{
-	
-private:
+public:
 	MD5();
+	std::string getFileMd5(const char * filename);
+	std::string getStrMd5(const std::string &str);
+private:
+	
 	void init();
 	void calculateMD5(size_t* chunk);
 	void calculateMD5Final();
-	std::string getFileMd5(const char * filename);
-	std::string getStrMd5(const std::string &str);
+	
+	//std::string getStrMd5(const std::string &str);
+	std::string changeHex(size_t num);
 		//每个chunk 占64个byte 每四个字节处理 便将chunk转位size_t 
 	size_t F(size_t x, size_t y, size_t z){
 		return (x & y) | ((~x) & z);
@@ -58,5 +63,6 @@ private:
 
 	size_t lastByte_;
 
+	//原始文件的字节长度
 	unsigned long long totalByte_;
 };
