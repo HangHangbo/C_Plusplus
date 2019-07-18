@@ -1,6 +1,37 @@
 
 #include "Md5.h"
 
+
+//初始化
+MD5::MD5()
+:chunkByte_(N)
+{
+	init();
+
+	memset(chunk_, 0, chunkByte_);
+	totalByte_ = lastByte_ = 0;
+}
+
+void MD5::init(){
+	a_ = 0x67452301;
+	b_ = 0xefcdab89;
+	c_ = 0x98badcfe;
+	d_ = 0x10325476;
+
+	size_t s[N] = { 7, 12, 17, 22, 7, 12, 17, 22, 7, 12, 17, 22, 7, 12, 17, 22,
+		5, 9, 14, 20, 5, 9, 14, 20, 5, 9, 14, 20, 5, 9, 14, 20,
+		4, 11, 16, 23, 4, 11, 16, 23, 4, 11, 16, 23, 4, 11, 16, 23,
+		6, 10, 15, 21, 6, 10, 15, 21, 6, 10, 15, 21, 6, 10, 15, 21 };
+	memcpy(sft_, s, sizeof(s));
+
+	for (int i = 0; i < 64; i++){
+		k_[i] = (size_t)(abs(sin(i + 1.0)) * pow(2.0, 32));
+	}
+
+}
+
+
+//处理每个chunk
 void MD5::calculateMD5(size_t *chunk){
 	size_t a = a_;
 	size_t b = b_;
@@ -43,6 +74,8 @@ void MD5::calculateMD5(size_t *chunk){
 	c_ += c;
 	d_ += d;
 }
+
+//处理最后一个chunk
 void MD5::calculateMD5Final(){
 	//lastByte_:<64byte 最后一块数据大小
 	unsigned char *p=chunk_ + lastByte_;
@@ -66,31 +99,9 @@ void MD5::calculateMD5Final(){
 	((unsigned long long*)chunk_)[7] = totalByte_ * 8;
 	calculateMD5((size_t*)chunk_);
 }
-MD5::MD5()
-:chunkByte_(N)
-{
-	init();
-	memset(chunk_, 0, chunkByte_);
-	totalByte_ = lastByte_ = 0;
-}
 
-void MD5::init(){
-	 a_ = 0x67452301;
-	 b_ = 0xefcdab89;
-	 c_ = 0x98badcfe;
-	 d_ = 0x10325476;
 
-	size_t s[N] = { 7, 12, 17, 22, 7, 12, 17, 22, 7, 12, 17, 22, 7, 12, 17, 22,
-				       5, 9, 14, 20, 5, 9, 14, 20, 5, 9, 14, 20, 5, 9, 14, 20,
-					   4, 11, 16, 23, 4, 11, 16, 23, 4, 11, 16, 23, 4, 11, 16, 23,
-					   6, 10, 15, 21, 6, 10, 15, 21, 6, 10, 15, 21, 6, 10, 15, 21 };
-	memcpy(sft_, s, sizeof(s));
-	
-	for (int i = 0; i < 64; i++){
-		k_[i] = (size_t)(abs(sin(i + 1.0)) * pow(2.0, 32));
-	}
 
-}
 
 std::string MD5::getFileMd5(const char * filename){
 	//输入文件流，按二进制处理
@@ -120,7 +131,7 @@ std::string MD5::getStrMd5(const std::string &str){
 		return "";
 	}
 	else{
-		unsigned char* pstr = (unsigned char*)str.c_str;
+		unsigned char*  pstr = (unsigned char *)str.c_str();
 		size_t numChunk = str.size() / chunkByte_;
 		for (size_t i = 0; i < numChunk; i++){
 			totalByte_ += chunkByte_;
@@ -139,7 +150,13 @@ std::string MD5::changeHex(size_t num){
 	std::string ret;
 	std::string byteStr;
 	for (int i = 0; i < 4; i++){
-		size_t b = (num >> (i * 8)) & 0xff;
+		//因为每次向ret中添加的一个字节的内容，
+		//但是一个ret是四个字节，
+		//并且在ret拼接时是尾插
+		//但是在byteStr中拼接时是头插
+		//所以每次进入循环先将bytStr清空
+		byteStr = "";
+		size_t b = (num >> (i * 8)) & 0x000000ff;
 		for (int j = 0; j < 2; ++j){
 			byteStr.insert(0, 1, strMap[b % 16]);
 			b /= 16;

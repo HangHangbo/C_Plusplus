@@ -13,7 +13,9 @@ public:
 private:
 	
 	void init();
+	//处理每个chunk
 	void calculateMD5(size_t* chunk);
+	//处理最后一个chunk
 	void calculateMD5Final();
 	
 	//std::string getStrMd5(const std::string &str);

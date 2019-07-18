@@ -1403,90 +1403,90 @@
 //	return 0;
 //}
 
-#include <iostream>
-#include <vector>
-#include <string>
-#include <set>
-#include <map>
-using namespace std;
-map<char, int> Map;
-
-void getNumber(string &num){
-	string str;
-	for (int i = 0; i < num.size();i++){
-		if (num[i] >= '0'&&num[i] <= '9')
-			str.push_back((int)num[i]);
-		else if (num[i] == '-')
-			continue;
-		else{
-			int exp = (int)Map[num[i]];
-			str.push_back(exp);
-		}
-	}
-	num = str;
-}
-
-int main(){
-	for (char i = 'A'; i <= 'Z'; i++){
-		if (i < 'D'){
-			Map.insert(make_pair(i, 2));
-		}
-		else if (i < 'G'){
-			Map.insert(make_pair(i, 3));
-		}
-		else if (i < 'J'){
-			Map.insert(make_pair(i, 4));
-		}
-		else if (i < 'M'){
-			Map.insert(make_pair(i, 5));
-		}
-		else if (i < 'P'){
-			Map.insert(make_pair(i, 6));
-		}
-		else if (i < 'T'){
-			Map.insert(make_pair(i, 7));
-		}
-		else if (i < 'W'){
-			Map.insert(make_pair(i, 8));
-		}
-		else if (i <='Z'){
-			Map.insert(make_pair(i, 9));
-		}
-	}
-	int num;
-	while (cin >> num){
-		vector<string> PhoneNum;
-		string number;
-		for (int i = 0; i<num; i++){
-			cin >> number;
-			getNumber(number);
-			PhoneNum.push_back(number);
-		}
-		//去重
-		auto it1 = PhoneNum.begin();
-		while (it1 != PhoneNum.end()){
-			auto it2 = it1++;
-			while (it2 != PhoneNum.end()){
-				if (*it1 == *it2)
-					it2 = PhoneNum.erase(it2);
-				
-				else
-					it2++;
-			}
-			it1++;
-		}
-		for (auto e : PhoneNum){
-			for (int i = 0; i < 7; i++){
-				if (i == 3)
-					cout << "-";
-				cout << e[i];
-			}
-			cout << endl;
-		}
-	}
-	return 0;
-}
-
+//#include <iostream>
+//#include <vector>
+//#include <string>
+//#include <set>
+//#include <map>
+//using namespace std;
+//map<char, int> Map;
+//
+//void getNumber(string &num){
+//	string str;
+//	for (int i = 0; i < num.size();i++){
+//		if (num[i] >= '0'&&num[i] <= '9')
+//			str.push_back((int)num[i]);
+//		else if (num[i] == '-')
+//			continue;
+//		else{
+//			int exp = (int)Map[num[i]];
+//			str.push_back(exp);
+//		}
+//	}
+//	num = str;
+//}
+//
+//int main(){
+//	for (char i = 'A'; i <= 'Z'; i++){
+//		if (i < 'D'){
+//			Map.insert(make_pair(i, 2));
+//		}
+//		else if (i < 'G'){
+//			Map.insert(make_pair(i, 3));
+//		}
+//		else if (i < 'J'){
+//			Map.insert(make_pair(i, 4));
+//		}
+//		else if (i < 'M'){
+//			Map.insert(make_pair(i, 5));
+//		}
+//		else if (i < 'P'){
+//			Map.insert(make_pair(i, 6));
+//		}
+//		else if (i < 'T'){
+//			Map.insert(make_pair(i, 7));
+//		}
+//		else if (i < 'W'){
+//			Map.insert(make_pair(i, 8));
+//		}
+//		else if (i <='Z'){
+//			Map.insert(make_pair(i, 9));
+//		}
+//	}
+//	int num;
+//	while (cin >> num){
+//		vector<string> PhoneNum;
+//		string number;
+//		for (int i = 0; i<num; i++){
+//			cin >> number;
+//			getNumber(number);
+//			PhoneNum.push_back(number);
+//		}
+//		//去重
+//		auto it1 = PhoneNum.begin();
+//		while (it1 != PhoneNum.end()){
+//			auto it2 = it1++;
+//			while (it2 != PhoneNum.end()){
+//				if (*it1 == *it2)
+//					it2 = PhoneNum.erase(it2);
+//				
+//				else
+//					it2++;
+//			}
+//			it1++;
+//		}
+//		for (auto e : PhoneNum){
+//			for (int i = 0; i < 7; i++){
+//				if (i == 3)
+//					cout << "-";
+//				cout << e[i];
+//			}
+//			cout << endl;
+//		}
+//	}
+//	return 0;
+//}
+//
 
 
 //#include <iostream>
@@ -1543,3 +1543,50 @@ int main(){
 //}
 
 
+// write your code here cpp
+#include <iostream>
+#include <map>
+#include <string>
+int main(){
+	std::string A, B;
+	while (std::cin >> A >> B){
+		bool f = 1;
+		if (B.empty() || (A.empty() && B.empty())){
+			std::cout << "Yes" << std::endl;
+			continue;
+		}
+		if (A.empty()){
+			std::cout << "No" << std::endl;
+			continue;
+		}
+
+		std::map<char, int> box;
+		for (int i = 0; i < A.size(); i++){
+			box[A[i]]++;
+		}
+		for (int i = 0; i < B.size(); i++){
+			auto it = box.find(B[i]);
+			if (it != box.end()){
+				it->second--;
+			}
+			else{
+				std::cout << "NO" << std::endl;
+				f = 0;
+				break;
+			}
+		}
+		if (f == 0)
+			continue;
+		for (auto e : box){
+			if (e.second < 0){
+				std::cout << "No" << std::endl;
+				f = 0;
+				break;
+			}
+		}
+		if (f == 0)
+			continue;
+		std::cout << "Yes" << std::endl;
+	}
+	return 0;
+}
