@@ -59,7 +59,7 @@ void MD5::calculateMD5(size_t *chunk){
 			f = I(b, c, d);
 			g = (7 * i) % 16;
 		}
-		
+
 		size_t dtmp = d;
 		d = c;
 		c = b;
@@ -78,7 +78,7 @@ void MD5::calculateMD5(size_t *chunk){
 //处理最后一个chunk
 void MD5::calculateMD5Final(){
 	//lastByte_:<64byte 最后一块数据大小
-	unsigned char *p=chunk_ + lastByte_;
+	unsigned char *p = chunk_ + lastByte_;
 	//填充位的前八bit位：1000 0000 0X80
 	*p++ = 0x80;
 	size_t remainFillByte = chunkByte_ - lastByte_ - 1;
@@ -122,7 +122,7 @@ std::string MD5::getFileMd5(const char * filename){
 		totalByte_ += lastByte_;
 		calculateMD5Final();
 	}
-	
+
 	return changeHex(a_) + changeHex(b_) + changeHex(c_) + changeHex(d_);
 }
 
@@ -138,7 +138,8 @@ std::string MD5::getStrMd5(const std::string &str){
 			calculateMD5((size_t*)(pstr + i*chunkByte_));
 		}
 		lastByte_ = str.size() % chunkByte_;
-		memcpy(chunk_, pstr + totalByte_, lastByte_ );
+		memcpy(chunk_, pstr + totalByte_, lastByte_);
+		totalByte_ += lastByte_;
 		calculateMD5Final();
 	}
 	return changeHex(a_) + changeHex(b_) + changeHex(c_) + changeHex(d_);

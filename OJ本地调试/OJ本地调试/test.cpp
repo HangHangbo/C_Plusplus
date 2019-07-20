@@ -1544,49 +1544,207 @@
 
 
 // write your code here cpp
+//#include <iostream>
+//#include <map>
+//#include <string>
+//int main(){
+//	std::string A, B;
+//	while (std::cin >> A >> B){
+//		bool f = 1;
+//		if (B.empty() || (A.empty() && B.empty())){
+//			std::cout << "Yes" << std::endl;
+//			continue;
+//		}
+//		if (A.empty()){
+//			std::cout << "No" << std::endl;
+//			continue;
+//		}
+//
+//		std::map<char, int> box;
+//		for (int i = 0; i < A.size(); i++){
+//			box[A[i]]++;
+//		}
+//		for (int i = 0; i < B.size(); i++){
+//			auto it = box.find(B[i]);
+//			if (it != box.end()){
+//				it->second--;
+//			}
+//			else{
+//				std::cout << "NO" << std::endl;
+//				f = 0;
+//				break;
+//			}
+//		}
+//		if (f == 0)
+//			continue;
+//		for (auto e : box){
+//			if (e.second < 0){
+//				std::cout << "No" << std::endl;
+//				f = 0;
+//				break;
+//			}
+//		}
+//		if (f == 0)
+//			continue;
+//		std::cout << "Yes" << std::endl;
+//	}
+//	return 0;
+//}
+
+
+
+//#include <iostream>
+//#include <string>
+//#include <vector>
+//
+//int isBroStr(const char *str1,const char *str2)
+//{
+//	int a[26 * 2] = { 0 };
+//	int i, strLen;
+//	if (!str1 && !str2)
+//		return 1;
+//	else if (!str1 || !str2)
+//		return 0;
+//	else
+//	{
+//		if (strlen(str1) != strlen(str2))
+//			return 0;
+//		strLen = strlen(str1);
+//		for (i = 0; i < strLen; i++)
+//		{
+//			++a[str1[i] - 'A'];
+//			--a[str2[i] - 'A'];
+//		}
+//		for (i = 0; i < 26 * 2; i++)
+//		if (a[i])
+//			return 0;
+//		return 1;
+//	}
+//}
+//
+//void GetBroWord(std::vector<std::string> dict, std::string key, std::vector<std::string>& res){
+//	for (auto D : dict){
+//		if (D.size() != key.size())
+//			continue;
+//		if (D == key)
+//			continue;
+//		const char *s = D.c_str();
+//		const char *c = key.c_str();
+//		if (isBroStr(s, c))
+//			res.push_back(D);
+//	}
+//
+//}
+//
+//int main(){
+//	int n;
+//	while (std::cin >> n){
+//		//给字典中添加单词
+//		std::vector<std::string> dict;
+//		for (int i = 0; i < n; i++){
+//			std::string word;
+//			std::cin >> word;
+//			//if (dict.empty())
+//			dict.push_back(word);
+//			/*else{
+//				auto it = dict.begin();
+//				while (it != dict.end())
+//				{
+//					if (word < *it){
+//						dict.insert(it, 1, word);
+//						break;
+//					}
+//					
+//				}
+//			}*/
+//		}
+//		//开始搜索
+//		std::string key;
+//		int num;
+//		std::cin >> key >> num;
+//		std::vector<std::string> result;
+//		GetBroWord(dict, key, result);
+//		std::cout << result.size() << " " << result[num - 1] << std::endl;
+//	}
+//
+//	return 0;
+//}
+//#include <iostream>
+//#include <map>
+//#include <vector>
+//
+//class Solution {
+//public:
+//	int MoreThanHalfNum_Solution(std::vector<int> numbers) {
+//		std::map<int,int> Map;
+//		int sz = numbers.size();
+//		for (int i = 0; i<numbers.size(); i++){
+//			Map[numbers[i]]++;
+//		}
+//		for (auto e : Map){
+//			if (e.second >= (sz / 2))
+//				return e.first;
+//		}
+//		return 0;
+//	}
+//};
+//
+//int main(){
+//	std::vector<int> numbers = {1,2,3,2,2,2,5,4,2};
+//	Solution s;
+//	
+//	std::cout<<s.MoreThanHalfNum_Solution(numbers)<<std::endl;
+//	system("pause");
+//	return 0;
+//}
+
 #include <iostream>
 #include <map>
 #include <string>
-int main(){
-	std::string A, B;
-	while (std::cin >> A >> B){
-		bool f = 1;
-		if (B.empty() || (A.empty() && B.empty())){
-			std::cout << "Yes" << std::endl;
-			continue;
-		}
-		if (A.empty()){
-			std::cout << "No" << std::endl;
-			continue;
-		}
 
-		std::map<char, int> box;
-		for (int i = 0; i < A.size(); i++){
-			box[A[i]]++;
+
+void getStr(std::string &req){
+	std::string str;
+	auto it = req.rbegin();
+
+	while (it != req.rend() && (str.size() < 17)){
+		if (*it == '\\')
+			break;
+		str += *it;
+		it++;
+	}
+	reverse(str.begin(), str.end());
+	req = str;
+}
+
+int main(){
+	std::map<int, std::string> Map;
+	std::map<int, int> Fal;
+	std::string req;
+	int num;
+	while (std::cin >> req >> num){
+		getStr(req);
+		if (Map.empty()){
+			Map.insert(make_pair(num,req));
+			Fal[num]++;
+			continue;
 		}
-		for (int i = 0; i < B.size(); i++){
-			auto it = box.find(B[i]);
-			if (it != box.end()){
-				it->second--;
-			}
-			else{
-				std::cout << "NO" << std::endl;
-				f = 0;
+		bool f = 0;
+		for (auto e : Map){
+			if (e.first == num&&e.second == req){
+				f = 1;
 				break;
 			}
 		}
-		if (f == 0)
+		if (f)
 			continue;
-		for (auto e : box){
-			if (e.second < 0){
-				std::cout << "No" << std::endl;
-				f = 0;
-				break;
+		Map.insert(make_pair(num, req));
+		Fal[num]++;
+		if (Map.size() == 8){
+			for (auto e : Map){
+				std::cout << e.second << " " << e.first << " " << Fal[e.first] << std::endl;
 			}
 		}
-		if (f == 0)
-			continue;
-		std::cout << "Yes" << std::endl;
 	}
 	return 0;
 }
