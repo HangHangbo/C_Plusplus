@@ -1701,50 +1701,68 @@
 #include <iostream>
 #include <map>
 #include <string>
+//
+//
+//void getStr(std::string &req){
+//	std::string str;
+//	auto it = req.rbegin();
+//
+//	while (it != req.rend() && (str.size() < 17)){
+//		if (*it == '\\')
+//			break;
+//		str += *it;
+//		it++;
+//	}
+//	reverse(str.begin(), str.end());
+//	req = str;
+//}
+//
+//int main(){
+//	std::map<int, std::string> Map;
+//	std::map<int, int> Fal;
+//	std::string req;
+//	int num;
+//	while (std::cin >> req >> num){
+//		getStr(req);
+//		if (Map.empty()){
+//			Map.insert(make_pair(num,req));
+//			Fal[num]++;
+//			continue;
+//		}
+//		bool f = 0;
+//		for (auto e : Map){
+//			if (e.first == num&&e.second == req){
+//				f = 1;
+//				break;
+//			}
+//		}
+//		if (f)
+//			continue;
+//		Map.insert(make_pair(num, req));
+//		Fal[num]++;
+//		if (Map.size() == 8){
+//			for (auto e : Map){
+//				std::cout << e.second << " " << e.first << " " << Fal[e.first] << std::endl;
+//			}
+//		}
+//	}
+//	return 0;
+//}
 
-
-void getStr(std::string &req){
-	std::string str;
-	auto it = req.rbegin();
-
-	while (it != req.rend() && (str.size() < 17)){
-		if (*it == '\\')
-			break;
-		str += *it;
-		it++;
+using namespace std;
+class Solution {
+public:
+	int uniquePaths(int m, int n) {
+		if (m == 0 || n == 0)
+			return 1;
+		else
+			return uniquePaths(m - 2, n-1) + uniquePaths(m-1, n - 2);
 	}
-	reverse(str.begin(), str.end());
-	req = str;
-}
+};
 
 int main(){
-	std::map<int, std::string> Map;
-	std::map<int, int> Fal;
-	std::string req;
-	int num;
-	while (std::cin >> req >> num){
-		getStr(req);
-		if (Map.empty()){
-			Map.insert(make_pair(num,req));
-			Fal[num]++;
-			continue;
-		}
-		bool f = 0;
-		for (auto e : Map){
-			if (e.first == num&&e.second == req){
-				f = 1;
-				break;
-			}
-		}
-		if (f)
-			continue;
-		Map.insert(make_pair(num, req));
-		Fal[num]++;
-		if (Map.size() == 8){
-			for (auto e : Map){
-				std::cout << e.second << " " << e.first << " " << Fal[e.first] << std::endl;
-			}
-		}
-	}
+	Solution s;
+	cout << s.uniquePaths(2,3) << endl;;
+	system("pause");
 	return 0;
 }
