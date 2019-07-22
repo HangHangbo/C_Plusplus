@@ -1697,10 +1697,10 @@
 //	system("pause");
 //	return 0;
 //}
-
-#include <iostream>
-#include <map>
-#include <string>
+//
+//#include <iostream>
+//#include <map>
+//#include <string>
 //
 //
 //void getStr(std::string &req){
@@ -1749,20 +1749,83 @@
 //	return 0;
 //}
 
-using namespace std;
-class Solution {
+//using namespace std;
+//class Solution {
+//public:
+//	int uniquePaths(int m, int n) {
+//		if (m == 0 || n == 0)
+//			return 1;
+//		else
+//			return uniquePaths(m - 2, n-1) + uniquePaths(m-1, n - 2);
+//	}
+//};
+//
+//int main(){
+//	Solution s;
+//	cout << s.uniquePaths(2,3) << endl;;
+//	system("pause");
+//	return 0;
+//}
+
+
+
+//class Solution {
+//public:
+//	bool wordBreak(string s, unordered_set<string> &dict) {
+//		if (s.empty()){
+//			return false;
+//		}
+//		if (dict.empty())
+//			return false;
+//		vector<bool> F(s.size() + 1, false);
+//		F[0] = true;
+//		for (int i = 1; i <= s.size(); i++){
+//			for (int j = 0; j<i; j++){
+//				if (F[j] && dict.find(s.substr(j, i - j)) != dict.end()){
+//					F[i] = true;
+//					break;
+//				}
+//			}
+//		}
+//		return F[s.size()];
+//	}
+//};
+
+
+
+#include <iostream>
+#include <vector>
+class MaxGap {
 public:
-	int uniquePaths(int m, int n) {
-		if (m == 0 || n == 0)
-			return 1;
-		else
-			return uniquePaths(m - 2, n-1) + uniquePaths(m-1, n - 2);
+	int getmax(std::vector<int> A, int n)
+	{
+		int max = A[n];
+		for (int i = n; i < A.size(); i++){
+			if (max < A[i])
+				max = A[i];
+		}
+		return max;
+	}
+	int findMaxGap(std::vector<int> A, int n) {
+		// write code here
+		int Left_max=0;
+		int result = 0,max_result=0;
+		for (int i = 0; i < n-1; i++){
+			if (Left_max<= A[i])
+				Left_max = A[i];
+			int right_max = getmax(A, i+1);
+			result = abs(Left_max - right_max);
+			if (result>max_result)
+				max_result = result;
+		}
+		return max_result;
 	}
 };
 
 int main(){
-	Solution s;
-	cout << s.uniquePaths(2,3) << endl;;
+	MaxGap s;
+	std::vector<int> A = { 2, 7, 3, 1, 1 };
+	std::cout<<s.findMaxGap(A, 5)<<std::endl;
 	system("pause");
 	return 0;
 }
