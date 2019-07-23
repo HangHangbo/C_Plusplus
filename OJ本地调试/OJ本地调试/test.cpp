@@ -1793,39 +1793,118 @@
 
 
 
+//#include <iostream>
+//#include <vector>
+//class MaxGap {
+//public:
+//	int getmax(std::vector<int> A, int n)
+//	{
+//		int max = A[n];
+//		for (int i = n; i < A.size(); i++){
+//			if (max < A[i])
+//				max = A[i];
+//		}
+//		return max;
+//	}
+//	int findMaxGap(std::vector<int> A, int n) {
+//		// write code here
+//		int Left_max=0;
+//		int result = 0,max_result=0;
+//		for (int i = 0; i < n-1; i++){
+//			if (Left_max<= A[i])
+//				Left_max = A[i];
+//			int right_max = getmax(A, i+1);
+//			result = abs(Left_max - right_max);
+//			if (result>max_result)
+//				max_result = result;
+//		}
+//		return max_result;
+//	}
+//};
+//
+//int main(){
+//	MaxGap s;
+//	std::vector<int> A = { 2, 7, 3, 1, 1 };
+//	std::cout<<s.findMaxGap(A, 5)<<std::endl;
+//	system("pause");
+//	return 0;
+//}
+//
+//#include <iostream>
+//#include <vector>
+//
+//#include <algorithm>
+//using namespace std;
+//class Solution {
+//public:
+//	int minimumTotal(vector<vector<int> > &triangle) {
+//		if (triangle.empty())
+//			return 0;
+//		int row = triangle.size();
+//		vector<vector<int>> F(triangle);
+//		for (int i = 1; i<row; i++){
+//			for (int j = 0; j<=i; j++){
+//				if (j == 0)
+//					F[i][j] = F[i-1][j] + triangle[i][j];
+//				else if (j == i)
+//					F[i][j] = F[i - 1][j - 1] + triangle[i][j];
+//				else
+//					F[i][j] = min(F[i-1][j] + triangle[i][j], F[i - 1][j - 1] + triangle[i][j]);
+//			}
+//		}
+//		int min_result = F[row-1][0];
+//		for (int j = 1; j < row; ++j){
+//			min_result = min(min_result, F[row - 1][j]);
+//		}
+//		return min_result;
+//	}
+//};
+//
+//int main(){
+//	vector<vector<int> > triangle(4, vector<int>(4, 0));
+//	triangle[0] = {2};
+//	triangle[1] = {3,4};
+//	triangle[2] = {6,5,7};
+//	triangle[3] = {4,1,3,8};
+//	Solution s;
+//	cout<<s.minimumTotal(triangle)<<endl;
+//	system("pause");
+//	return 0;
+//}
+
+
+
 #include <iostream>
 #include <vector>
-class MaxGap {
+
+#include <algorithm>
+using namespace std;
+
+
+//±≥∞¸Œ Ã‚
+class Solution {
 public:
-	int getmax(std::vector<int> A, int n)
-	{
-		int max = A[n];
-		for (int i = n; i < A.size(); i++){
-			if (max < A[i])
-				max = A[i];
+	/**
+	* @param m: An integer m denotes the size of a backpack
+	* @param A: Given n items with size A[i]
+	* @param V: Given n items with value V[i]
+	* @return: The maximum value
+	*/
+	int backPackII(int m, vector<int> &A, vector<int> &V) {
+		// write your code here
+		if (A.empty())
+			return 0;
+		vector<vector<int>> F(A.size()+1, vector<int>(m+1, 0));
+
+		for (int i = 1; i < A.size()+1; i++){
+			for (int j = 1; j <= m; j++){
+				if (A[i - 1]>j)
+					F[i][j] = F[i - 1][j];
+				else
+					F[i][j] = max(F[i - 1][j - A[i - 1]] + V[i - 1], F[i - 1][j]);
+			}
+
 		}
-		return max;
-	}
-	int findMaxGap(std::vector<int> A, int n) {
-		// write code here
-		int Left_max=0;
-		int result = 0,max_result=0;
-		for (int i = 0; i < n-1; i++){
-			if (Left_max<= A[i])
-				Left_max = A[i];
-			int right_max = getmax(A, i+1);
-			result = abs(Left_max - right_max);
-			if (result>max_result)
-				max_result = result;
-		}
-		return max_result;
+		return F[A.size() + 1][m];
 	}
 };
-
-int main(){
-	MaxGap s;
-	std::vector<int> A = { 2, 7, 3, 1, 1 };
-	std::cout<<s.findMaxGap(A, 5)<<std::endl;
-	system("pause");
-	return 0;
-}
