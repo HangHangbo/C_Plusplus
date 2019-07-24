@@ -1874,37 +1874,73 @@
 
 
 
+//#include <iostream>
+//#include <vector>
+//
+//#include <algorithm>
+//using namespace std;
+//
+//
+////背包问题
+//class Solution {
+//public:
+//	/**
+//	* @param m: An integer m denotes the size of a backpack
+//	* @param A: Given n items with size A[i]
+//	* @param V: Given n items with value V[i]
+//	* @return: The maximum value
+//	*/
+//	int backPackII(int m, vector<int> &A, vector<int> &V) {
+//		// write your code here
+//		if (A.empty())
+//			return 0;
+//		vector<vector<int>> F(A.size()+1, vector<int>(m+1, 0));
+//
+//		for (int i = 1; i < A.size()+1; i++){
+//			for (int j = 1; j <= m; j++){
+//				if (A[i - 1]>j)
+//					F[i][j] = F[i - 1][j];
+//				else
+//					F[i][j] = max(F[i - 1][j - A[i - 1]] + V[i - 1], F[i - 1][j]);
+//			}
+//
+//		}
+//		return F[A.size() + 1][m];
+//	}
+//};
+
+
 #include <iostream>
-#include <vector>
 
-#include <algorithm>
 using namespace std;
+//void TestFor()
+//{
+//	int array[] = { 1, 2, 3, 4, 5 };
+//	for (int i = 0; i < sizeof(array) / sizeof(array[0]); ++i)
+//		array[i] *= 2;
+//	for (int* p = array; p < array + sizeof(array) / sizeof(array[0]); ++p)
+//		std::cout << *p << std::endl;
+//}
+//
+//int main(){
+//	TestFor();
+//	system("pause");
+//	return 0;
+//}
 
-
-//背包问题
-class Solution {
-public:
-	/**
-	* @param m: An integer m denotes the size of a backpack
-	* @param A: Given n items with size A[i]
-	* @param V: Given n items with value V[i]
-	* @return: The maximum value
-	*/
-	int backPackII(int m, vector<int> &A, vector<int> &V) {
-		// write your code here
-		if (A.empty())
-			return 0;
-		vector<vector<int>> F(A.size()+1, vector<int>(m+1, 0));
-
-		for (int i = 1; i < A.size()+1; i++){
-			for (int j = 1; j <= m; j++){
-				if (A[i - 1]>j)
-					F[i][j] = F[i - 1][j];
-				else
-					F[i][j] = max(F[i - 1][j - A[i - 1]] + V[i - 1], F[i - 1][j]);
-			}
-
-		}
-		return F[A.size() + 1][m];
-	}
-};
+void f(int)
+{
+	cout << "f(int)" << endl;
+}
+void f(int*)
+{
+	cout << "f(int*)" << endl;
+}
+int main()
+{
+	f(0);
+	f(NULL);
+	f((int*)NULL);
+	system("pause");
+	return 0;
+}
