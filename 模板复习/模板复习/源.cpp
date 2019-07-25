@@ -60,52 +60,73 @@ template<class T> T Add(const T& left, const T& right) {
 //	return 0;
 //}  
 
-// 动态顺序表
+//// 动态顺序表
+//template<class T>
+//class Vector
+//{
+//public:
+//	Vector(size_t capacity = 10)
+//		: _pData(new T[capacity])
+//		, _size(0)
+//		, _capacity(capacity)
+//	{}
+//	// 使用析构函数演示：在类中声明，在类外定义。
+//	~Vector();
+//	void PushBack(const T& data)
+//	{
+//		// _CheckCapacity();
+//		_pData[_size++] = data;
+//	}
+//	void PopBack()
+//	{
+//		--_size;
+//	}
+//	size_t Size()
+//	{
+//		return _size;
+//	}
+//	T& operator[](size_t pos)
+//	{
+//		assert(pos < _size);
+//		return _pData[pos];
+//	}
+//private: T* _pData;
+//		 size_t _size;
+//		 size_t _capacity;
+//};  
+//
+//int main(){
+//	Vector<int> v;
+//	v.PushBack(1);
+//	v.PushBack(2);
+//	v.PushBack(3);
+//	v.PushBack(4);
+//	v.PopBack();
+//	cout << v.Size() << endl;
+//	for (int i = 0; i < v.Size();i++){
+//		cout << v[i] << endl;
+//	}
+//	system("pause");
+//	return 0;
+//}
+
 template<class T>
-class Vector
+bool IsEqual(T& left, T& right) {
+	return left > right;
+}
+void Test()
 {
-public:
-	Vector(size_t capacity = 10)
-		: _pData(new T[capacity])
-		, _size(0)
-		, _capacity(capacity)
-	{}
-	// 使用析构函数演示：在类中声明，在类外定义。
-	~Vector();
-	void PushBack(const T& data)
-	{
-		// _CheckCapacity();
-		_pData[_size++] = data;
-	}
-	void PopBack()
-	{
-		--_size;
-	}
-	size_t Size()
-	{
-		return _size;
-	}
-	T& operator[](size_t pos)
-	{
-		assert(pos < _size);
-		return _pData[pos];
-	}
-private: T* _pData;
-		 size_t _size;
-		 size_t _capacity;
-};  
+	
+	
+	
+	char* p1 = "hello";
+	char* p2 = "world";
+	cout << IsEqual(p1, p2) << endl;
+
+}
 
 int main(){
-	Vector<int> v;
-	v.PushBack(1);
-	v.PushBack(2);
-	v.PushBack(3);
-	v.PushBack(4);
-	v.PopBack();
-	cout << v.Size() << endl;
-	for (int i = 0; i < v.Size();i++){
-		cout << v[i] << endl;
-	}
+	Test();
 	system("pause");
 	return 0;
 }
