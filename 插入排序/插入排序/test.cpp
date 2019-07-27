@@ -50,11 +50,29 @@ void ShellSort(int array[], int size){
 
 
 
+void SelectSort(int array[], int size){
+	int min;//记录最小元素的下标
+	for (int i = 0; i < size - 1; i++){
+		min = i;
+		for (int j = i + 1; j < size - 1; i++){
+			if (array[j] < array[min]){
+				min = j;
+			}
+		}
+		if (i != min){
+			int k = array[i];
+			array[i] = array[min];
+			array[min] = k;
+		}
+	}
+	Print(array, size);
+}
+
 int main(){
-	int array[] = { 2, 5, 8, 7, 9, 1, 2, 4 };
+	int array[] = { 7, 4, 5, 9, 8, 2, 1 };
 	int size = sizeof(array) / sizeof(array[0]);
-	//InsertSort(array, size);
-	ShellSort(array, size);
+
+	SelectSort(array, size);
 	system("pause");
 	return 0;
 }
